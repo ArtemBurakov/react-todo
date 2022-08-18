@@ -21,11 +21,11 @@ import AddWorkspace from './routes/workspaces/AddWorkspace'
 function App() {
   return (
     <Routes>
-      <Route path="" element={<AppLayout />}>
+      <Route path="/" element={<AppLayout />}>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route element={<RequireAuth />}>
-          <Route path="" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="tasks" element={<RequireAuth />}>
             <Route index element={<Tasks />} />
             <Route path=":taskId" element={<Task />} />
