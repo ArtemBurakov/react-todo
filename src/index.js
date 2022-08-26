@@ -1,21 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './context/AuthProvider'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { store } from './app/store'
+import { Provider } from 'react-redux'
+import { setUserFromLocalStorage } from './features/user/userSlice'
+
+store.dispatch(setUserFromLocalStorage())
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="*" element={<App />} />
-        </Routes>
-      </AuthProvider>
+      <Routes>
+        <Route path="*" element={<App />} />
+      </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  </Provider>
 )
 
 // If you want to start measuring performance in your app, pass a function
