@@ -4,8 +4,11 @@ import Api, { handleResponseError } from '../../app/axiosClient'
 const initialState = {
   workspaces: [],
   selectedWorkspace: null,
-  loading: 'idle',
   error: null,
+  fetchWorkspacesLoading: 'idle',
+  fetchWorkspaceLoading: 'idle',
+  addWorkspaceLoading: 'idle',
+  updateWorkspaceLoading: 'idle',
 }
 
 export const fetchWorkspaces = createAsyncThunk(
@@ -97,60 +100,60 @@ export const workspacesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchWorkspaces.pending, (state) => {
-        state.loading = 'pending'
+        state.fetchWorkspacesLoading = 'pending'
         state.error = null
       })
       .addCase(fetchWorkspaces.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchWorkspacesLoading === 'pending') {
+          state.fetchWorkspacesLoading = 'idle'
           state.workspaces = action.payload
         }
       })
       .addCase(fetchWorkspaces.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchWorkspacesLoading === 'pending') {
+          state.fetchWorkspacesLoading = 'idle'
           state.error = action.payload
         }
       })
       .addCase(fetchWorkspace.pending, (state) => {
-        state.loading = 'pending'
+        state.fetchWorkspaceLoading = 'pending'
         state.error = null
       })
       .addCase(fetchWorkspace.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchWorkspaceLoading === 'pending') {
+          state.fetchWorkspaceLoading = 'idle'
           state.selectedWorkspace = action.payload
         }
       })
       .addCase(fetchWorkspace.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchWorkspaceLoading === 'pending') {
+          state.fetchWorkspaceLoading = 'idle'
           state.error = action.payload
         }
       })
       .addCase(addWorkspace.pending, (state) => {
-        state.loading = 'pending'
+        state.addWorkspaceLoading = 'pending'
         state.error = null
       })
       .addCase(addWorkspace.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.addWorkspaceLoading === 'pending') {
+          state.addWorkspaceLoading = 'idle'
           state.workspaces = [action.payload, ...state.workspaces]
         }
       })
       .addCase(addWorkspace.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.addWorkspaceLoading === 'pending') {
+          state.addWorkspaceLoading = 'idle'
           state.error = action.payload
         }
       })
       .addCase(updateWorkspace.pending, (state) => {
-        state.loading = 'pending'
+        state.updateWorkspaceLoading = 'pending'
         state.error = null
       })
       .addCase(updateWorkspace.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.updateWorkspaceLoading === 'pending') {
+          state.updateWorkspaceLoading = 'idle'
           state.selectedWorkspace = action.payload
           const updatedWorkspaceIndex = state.workspaces
             .map((workspace) => workspace.id)
@@ -159,8 +162,8 @@ export const workspacesSlice = createSlice({
         }
       })
       .addCase(updateWorkspace.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.updateWorkspaceLoading === 'pending') {
+          state.updateWorkspaceLoading = 'idle'
           state.error = action.payload
         }
       })
@@ -171,7 +174,15 @@ export const getWorkspaces = (state) => state.workspaces.workspaces
 export const getSelectedWorkspace = (state) =>
   state.workspaces.selectedWorkspace
 export const getWorkspacesError = (state) => state.workspaces.error
-export const getWorkspacesLoading = (state) => state.workspaces.loading
+
+export const getAddWorkspaceLoading = (state) =>
+  state.workspaces.addWorkspaceLoading
+export const getUpdateWorkspaceLoading = (state) =>
+  state.workspaces.updateWorkspaceLoading
+export const getFetchWorkspaceLoading = (state) =>
+  state.workspaces.fetchWorkspaceLoading
+export const getFetchWorkspacesLoading = (state) =>
+  state.workspaces.fetchWorkspacesLoading
 
 // Action creators are generated for each case reducer function
 export const { setSelectedWorkspace, removeSelectedWorkspace } =

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Spinner, Row, Col, Nav, Tab, Alert, Button } from 'react-bootstrap'
+import { Row, Col, Nav, Tab, Alert, Button } from 'react-bootstrap'
 
 import AddNote from '../../components/Notes/AddNote'
+import LoadingNotesList from '../../components/Notes/LoadingNotesList'
 import NotesList from '../../components/Notes/NotesList'
-import { fetchNotes, getNotesError, getNotesLoading } from './notesSlice'
-import { fetchTasks } from '../tasks/tasksSlice'
+import { fetchNotes, getNotesError, getFetchNotesLoading } from './notesSlice'
+import { fetchTasks, getFetchTasksLoading } from '../tasks/tasksSlice'
 import { getUser } from '../user/userSlice'
 
 export default function Notes() {
@@ -14,7 +15,8 @@ export default function Notes() {
   const [show, setShow] = useState(false)
   const { access_token } = useSelector(getUser)
   const responseError = useSelector(getNotesError)
-  const notesLoading = useSelector(getNotesLoading)
+  const fetchNotesLoading = useSelector(getFetchNotesLoading)
+  const tasksFetchLoading = useSelector(getFetchTasksLoading)
 
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -30,6 +32,7 @@ export default function Notes() {
 
   return (
     <>
+      <h4>Your notes list</h4>
       <Tab.Container defaultActiveKey="10">
         <Row>
           <Col md={3} className="mb-md-0 mb-3">
@@ -54,10 +57,9 @@ export default function Notes() {
                 <Alert variant="warning">{responseError}</Alert>
               ) : (
                 <>
-                  {notesLoading === 'pending' ? (
-                    <div className="d-flex justify-content-center">
-                      <Spinner animation="border" variant="secondary" />
-                    </div>
+                  {fetchNotesLoading === 'pending' ||
+                  tasksFetchLoading === 'pending' ? (
+                    <LoadingNotesList />
                   ) : (
                     <>
                       <Tab.Pane eventKey="10">

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Alert, Spinner } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 
 import TasksList from '../../components/Tasks/TasksList'
-import { fetchTasks, getTasksError, getTasksLoading } from './tasksSlice'
+import LoadingTasksList from '../../components/Tasks/LoadingTasksList'
+import { fetchTasks, getTasksError, getFetchTasksLoading } from './tasksSlice'
 import { getUser } from '../user/userSlice'
 import AddNewTaskInput from '../../components/Tasks/AddNewTaskInput'
 
@@ -12,7 +13,7 @@ export default function Tasks() {
   const dispatch = useDispatch()
   const { access_token } = useSelector(getUser)
   const responseError = useSelector(getTasksError)
-  const tasksLoading = useSelector(getTasksLoading)
+  const fetchTasksLoading = useSelector(getFetchTasksLoading)
 
   useEffect(() => {
     dispatch(fetchTasks(access_token))
@@ -20,19 +21,16 @@ export default function Tasks() {
 
   return (
     <>
+      <h4>Your todo list</h4>
       {responseError ? (
         <Alert variant="warning">{responseError}</Alert>
       ) : (
         <>
-          {tasksLoading === 'pending' ? (
-            <div className="d-flex justify-content-center">
-              <Spinner animation="border" variant="secondary" />
-            </div>
+          <AddNewTaskInput />
+          {fetchTasksLoading === 'pending' ? (
+            <LoadingTasksList />
           ) : (
-            <>
-              <AddNewTaskInput />
-              <TasksList />
-            </>
+            <TasksList />
           )}
         </>
       )}

@@ -4,8 +4,10 @@ import Api, { handleResponseError } from '../../app/axiosClient'
 const initialState = {
   notes: [],
   selectedNote: null,
-  loading: 'idle',
   error: null,
+  addNoteLoading: 'idle',
+  updateNoteLoading: 'idle',
+  fetchNotesLoading: 'idle',
 }
 
 export const fetchNotes = createAsyncThunk(
@@ -85,44 +87,44 @@ export const notesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchNotes.pending, (state) => {
-        state.loading = 'pending'
+        state.fetchNotesLoading = 'pending'
         state.error = null
       })
       .addCase(fetchNotes.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchNotesLoading === 'pending') {
+          state.fetchNotesLoading = 'idle'
           state.notes = action.payload
         }
       })
       .addCase(fetchNotes.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchNotesLoading === 'pending') {
+          state.fetchNotesLoading = 'idle'
           state.error = action.payload
         }
       })
       .addCase(addNote.pending, (state) => {
-        state.loading = 'pending'
+        state.addNoteLoading = 'pending'
         state.error = null
       })
       .addCase(addNote.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.addNoteLoading === 'pending') {
+          state.addNoteLoading = 'idle'
           state.notes = [action.payload, ...state.notes]
         }
       })
       .addCase(addNote.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.addNoteLoading === 'pending') {
+          state.addNoteLoading = 'idle'
           state.error = action.payload
         }
       })
       .addCase(updateNote.pending, (state) => {
-        state.loading = 'pending'
+        state.updateNoteLoading = 'pending'
         state.error = null
       })
       .addCase(updateNote.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.updateNoteLoading === 'pending') {
+          state.updateNoteLoading = 'idle'
           const updatedNoteIndex = state.notes
             .map((note) => note.id)
             .indexOf(action.payload.id)
@@ -130,8 +132,8 @@ export const notesSlice = createSlice({
         }
       })
       .addCase(updateNote.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.updateNoteLoading === 'pending') {
+          state.updateNoteLoading = 'idle'
           state.error = action.payload
         }
       })
@@ -140,8 +142,11 @@ export const notesSlice = createSlice({
 
 export const getNotes = (state) => state.notes.notes
 export const getNotesError = (state) => state.notes.error
-export const getNotesLoading = (state) => state.notes.loading
 export const getSelectedNote = (state) => state.notes.selectedNote
+
+export const getAddNoteLoading = (state) => state.notes.addNoteLoading
+export const getUpdateNoteLoading = (state) => state.notes.updateNoteLoading
+export const getFetchNotesLoading = (state) => state.notes.fetchNotesLoading
 
 // Action creators are generated for each case reducer function
 export const { setSelectedNote, removeSelectedNote } = notesSlice.actions

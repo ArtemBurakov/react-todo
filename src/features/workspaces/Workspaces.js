@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Alert, Button, Spinner } from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap'
 
 import AddWorkspace from '../../components/Workspaces/AddWorkspace'
+import LoadingWorkspacesList from '../../components/Workspaces/LoadingWorkspacesList'
 import WorkspacesList from '../../components/Workspaces/WorkspacesList'
 import {
   fetchWorkspaces,
   getWorkspacesError,
-  getWorkspacesLoading,
+  getFetchWorkspacesLoading,
 } from './workspacesSlice'
 import { getUser } from '../user/userSlice'
 
@@ -16,7 +17,7 @@ export default function Workspaces() {
   const dispatch = useDispatch()
   const { access_token } = useSelector(getUser)
   const responseError = useSelector(getWorkspacesError)
-  const workspacesLoading = useSelector(getWorkspacesLoading)
+  const fetchWorkspacesLoading = useSelector(getFetchWorkspacesLoading)
   const [show, setShow] = useState(false)
 
   const handleShow = () => setShow(true)
@@ -32,23 +33,16 @@ export default function Workspaces() {
         <Alert variant="warning">{responseError}</Alert>
       ) : (
         <>
-          {workspacesLoading === 'pending' ? (
-            <div className="d-flex justify-content-center">
-              <Spinner animation="border" variant="secondary" />
-            </div>
+          <h4>Your workspaces list</h4>
+          <Button className="mb-3" variant="primary" onClick={handleShow}>
+            Add Workspace
+          </Button>
+          {fetchWorkspacesLoading === 'pending' ? (
+            <LoadingWorkspacesList />
           ) : (
-            <>
-              <Button className="mb-3" variant="primary" onClick={handleShow}>
-                Add Workspace
-              </Button>
-              <WorkspacesList />
-            </>
+            <WorkspacesList />
           )}
-          {show ? (
-            <AddWorkspace show={show} handleClose={handleClose} />
-          ) : (
-            <></>
-          )}
+          {show && <AddWorkspace show={show} handleClose={handleClose} />}
         </>
       )}
     </>

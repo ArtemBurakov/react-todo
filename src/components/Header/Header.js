@@ -23,7 +23,7 @@ export default function Header() {
         <Navbar.Brand as={Link} to="/">
           Todo
         </Navbar.Brand>
-        {user ? (
+        {user && (
           <>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -46,8 +46,6 @@ export default function Header() {
               </Button>
             </Navbar.Collapse>
           </>
-        ) : (
-          <></>
         )}
       </Container>
     </Navbar>

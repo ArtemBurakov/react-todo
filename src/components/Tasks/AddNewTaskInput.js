@@ -1,45 +1,50 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Form, Button, InputGroup } from 'react-bootstrap'
+import { Form, InputGroup } from 'react-bootstrap'
 
+import Loader from '../Loader/Loader'
 import { getUser } from '../../features/user/userSlice'
 import { getSelectedNote } from '../../features/notes/notesSlice'
-import { addTask, getTasksLoading } from '../../features/tasks/tasksSlice'
+import { addTask, getAddTaskLoading } from '../../features/tasks/tasksSlice'
 
 export default function AddNewTaskInput() {
+  const taskInput = useRef()
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const { id, access_token } = useSelector(getUser)
   const selectedNote = useSelector(getSelectedNote)
-  const tasksLoading = useSelector(getTasksLoading)
+  const addTaskLoading = useSelector(getAddTaskLoading)
 
   const handleInputName = (event) => setName(event.target.value)
 
   const onAddNewTaskClick = async () => {
     if (typeof name === 'string' && name !== '') {
-      if (tasksLoading === 'idle') {
+      if (addTaskLoading === 'idle') {
         const note_id = selectedNote?.id
         await dispatch(addTask({ id, access_token, note_id, name }))
         setName('')
       }
+    } else {
+      taskInput.current.focus()
     }
   }
+
   return (
     <InputGroup className="mb-3">
       <Form.Control
         placeholder="Enter task name here..."
         aria-describedby="addNewTask"
         value={name}
+        ref={taskInput}
         onChange={handleInputName}
       />
-      <Button
-        variant="outline-primary"
-        id="addNewTask"
+      <Loader
+        style="outline-primary"
+        loading={addTaskLoading}
         onClick={onAddNewTaskClick}
-      >
-        Add new task
-      </Button>
+        buttonText="Add new task"
+      />
     </InputGroup>
   )
 }

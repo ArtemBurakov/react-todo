@@ -4,8 +4,10 @@ import Api, { handleResponseError } from '../../app/axiosClient'
 const initialState = {
   tasks: [],
   selectedTask: null,
-  loading: 'idle',
   error: null,
+  addTaskLoading: 'idle',
+  updateTaskLoading: 'idle',
+  fetchTasksLoading: 'idle',
 }
 
 export const fetchTasks = createAsyncThunk(
@@ -79,44 +81,44 @@ export const tasksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.pending, (state) => {
-        state.loading = 'pending'
+        state.fetchTasksLoading = 'pending'
         state.error = null
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchTasksLoading === 'pending') {
+          state.fetchTasksLoading = 'idle'
           state.tasks = action.payload
         }
       })
       .addCase(fetchTasks.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.fetchTasksLoading === 'pending') {
+          state.fetchTasksLoading = 'idle'
           state.error = action.payload
         }
       })
       .addCase(addTask.pending, (state) => {
-        state.loading = 'pending'
+        state.addTaskLoading = 'pending'
         state.error = null
       })
       .addCase(addTask.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.addTaskLoading === 'pending') {
+          state.addTaskLoading = 'idle'
           state.tasks = [action.payload, ...state.tasks]
         }
       })
       .addCase(addTask.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.addTaskLoading === 'pending') {
+          state.addTaskLoading = 'idle'
           state.error = action.payload
         }
       })
       .addCase(updateTask.pending, (state) => {
-        state.loading = 'pending'
+        state.updateTaskLoading = 'pending'
         state.error = null
       })
       .addCase(updateTask.fulfilled, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.updateTaskLoading === 'pending') {
+          state.updateTaskLoading = 'idle'
           const updatedTaskIndex = state.tasks
             .map((task) => task.id)
             .indexOf(action.payload.id)
@@ -124,8 +126,8 @@ export const tasksSlice = createSlice({
         }
       })
       .addCase(updateTask.rejected, (state, action) => {
-        if (state.loading === 'pending') {
-          state.loading = 'idle'
+        if (state.updateTaskLoading === 'pending') {
+          state.updateTaskLoading = 'idle'
           state.error = action.payload
         }
       })
@@ -135,7 +137,10 @@ export const tasksSlice = createSlice({
 export const getTasks = (state) => state.tasks.tasks
 export const selectedTask = (state) => state.tasks.selectedTask
 export const getTasksError = (state) => state.tasks.error
-export const getTasksLoading = (state) => state.tasks.loading
+
+export const getAddTaskLoading = (state) => state.tasks.addTaskLoading
+export const getUpdateTaskLoading = (state) => state.tasks.updateTaskLoading
+export const getFetchTasksLoading = (state) => state.tasks.fetchTasksLoading
 
 // Action creators are generated for each case reducer function
 export const { setSelectedTask } = tasksSlice.actions

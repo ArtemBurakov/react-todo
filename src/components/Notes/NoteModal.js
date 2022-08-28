@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-  Form,
-  Modal,
-  Spinner,
-  Button,
-  ButtonGroup,
-  ToggleButton,
-} from 'react-bootstrap'
+import { Form, Modal, Button, ButtonGroup, ToggleButton } from 'react-bootstrap'
 
+import Loader from '../Loader/Loader'
 import TasksList from '../Tasks/TasksList'
 import AddNewTaskInput from '../Tasks/AddNewTaskInput'
 import {
   updateNote,
   getSelectedNote,
-  getNotesLoading,
+  getUpdateNoteLoading,
   removeSelectedNote,
 } from '../../features/notes/notesSlice'
 import { getUser } from '../../features/user/userSlice'
@@ -24,7 +18,7 @@ export default function NoteModal({ show, handleClose }) {
   const dispatch = useDispatch()
   const { access_token } = useSelector(getUser)
   const selectedNote = useSelector(getSelectedNote)
-  const notesLoading = useSelector(getNotesLoading)
+  const updateNoteLoading = useSelector(getUpdateNoteLoading)
 
   const [name, setName] = useState(selectedNote.name)
   const [text, setText] = useState(selectedNote.text)
@@ -40,7 +34,7 @@ export default function NoteModal({ show, handleClose }) {
   const handleInputText = (event) => setText(event.target.value)
 
   const onSaveChangesClick = async () => {
-    if (notesLoading === 'idle') {
+    if (updateNoteLoading === 'idle') {
       const noteId = selectedNote.id
       await dispatch(updateNote({ access_token, noteId, name, text, status }))
       handleClose()
@@ -106,22 +100,11 @@ export default function NoteModal({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        {notesLoading === 'pending' ? (
-          <Button variant="primary" disabled>
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Loading...</span>
-          </Button>
-        ) : (
-          <Button variant="primary" onClick={onSaveChangesClick}>
-            Save Changes
-          </Button>
-        )}
+        <Loader
+          loading={updateNoteLoading}
+          onClick={onSaveChangesClick}
+          buttonText="Save Changes"
+        />
       </Modal.Footer>
     </Modal>
   )

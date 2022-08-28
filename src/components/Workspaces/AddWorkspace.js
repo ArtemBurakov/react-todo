@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Form, Modal, Button, Spinner } from 'react-bootstrap'
+import { Form, Modal, Button } from 'react-bootstrap'
 
+import Loader from '../Loader/Loader'
 import {
   addWorkspace,
-  getWorkspacesLoading,
+  getAddWorkspaceLoading,
 } from '../../features/workspaces/workspacesSlice'
 import { getUser } from '../../features/user/userSlice'
 
@@ -13,12 +14,12 @@ export default function AddWorkspace({ show, handleClose }) {
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const { id, access_token } = useSelector(getUser)
-  const workspacesLoading = useSelector(getWorkspacesLoading)
+  const addWorkspaceLoading = useSelector(getAddWorkspaceLoading)
 
   const handleInputName = (event) => setName(event.target.value)
 
   const onAddWorkspaceClick = async () => {
-    if (workspacesLoading === 'idle') {
+    if (addWorkspaceLoading === 'idle') {
       await dispatch(addWorkspace({ id, access_token, name }))
       handleClose()
     }
@@ -46,22 +47,11 @@ export default function AddWorkspace({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        {workspacesLoading === 'pending' ? (
-          <Button variant="primary" disabled>
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Loading...</span>
-          </Button>
-        ) : (
-          <Button variant="primary" onClick={onAddWorkspaceClick}>
-            Add Workspace
-          </Button>
-        )}
+        <Loader
+          loading={addWorkspaceLoading}
+          onClick={onAddWorkspaceClick}
+          buttonText="Add Workspace"
+        />
       </Modal.Footer>
     </Modal>
   )

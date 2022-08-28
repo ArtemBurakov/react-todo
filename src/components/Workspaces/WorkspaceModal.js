@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Form, Modal, Spinner, Button } from 'react-bootstrap'
+import { Form, Modal, Button } from 'react-bootstrap'
 
+import Loader from '../Loader/Loader'
 import {
   updateWorkspace,
-  getWorkspacesLoading,
+  getUpdateWorkspaceLoading,
   getSelectedWorkspace,
 } from '../../features/workspaces/workspacesSlice'
 import { getUser } from '../../features/user/userSlice'
@@ -14,7 +15,7 @@ export default function WorkspaceModal({ show, handleClose }) {
   const dispatch = useDispatch()
   const { access_token } = useSelector(getUser)
   const selectedWorkspace = useSelector(getSelectedWorkspace)
-  const workspacesLoading = useSelector(getWorkspacesLoading)
+  const updateWorkspaceLoading = useSelector(getUpdateWorkspaceLoading)
 
   const [name, setName] = useState(selectedWorkspace.name)
   const [status, setStatus] = useState(selectedWorkspace.status)
@@ -22,7 +23,7 @@ export default function WorkspaceModal({ show, handleClose }) {
   const handleInputName = (event) => setName(event.target.value)
 
   const onSaveChangesClick = async () => {
-    if (workspacesLoading === 'idle') {
+    if (updateWorkspaceLoading === 'idle') {
       const workspaceId = selectedWorkspace.id
       await dispatch(
         updateWorkspace({ access_token, workspaceId, name, status })
@@ -56,22 +57,11 @@ export default function WorkspaceModal({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        {workspacesLoading === 'pending' ? (
-          <Button variant="primary" disabled>
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Loading...</span>
-          </Button>
-        ) : (
-          <Button variant="primary" onClick={onSaveChangesClick}>
-            Save Changes
-          </Button>
-        )}
+        <Loader
+          loading={updateWorkspaceLoading}
+          onClick={onSaveChangesClick}
+          buttonText="Save Changes"
+        />
       </Modal.Footer>
     </Modal>
   )

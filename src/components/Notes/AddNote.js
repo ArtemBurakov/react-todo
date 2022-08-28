@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Form, Modal, Button, Spinner } from 'react-bootstrap'
+import { Form, Modal, Button } from 'react-bootstrap'
 
+import Loader from '../Loader/Loader'
 import { getUser } from '../../features/user/userSlice'
-import { addNote, getNotesLoading } from '../../features/notes/notesSlice'
+import { addNote, getAddNoteLoading } from '../../features/notes/notesSlice'
 import { getSelectedWorkspace } from '../../features/workspaces/workspacesSlice'
 
 export default function AddNote({ show, handleClose }) {
@@ -12,14 +13,14 @@ export default function AddNote({ show, handleClose }) {
   const [name, setName] = useState('')
   const [text, setText] = useState('')
   const { id, access_token } = useSelector(getUser)
-  const notesLoading = useSelector(getNotesLoading)
+  const addNoteLoading = useSelector(getAddNoteLoading)
   const selectedWorkspace = useSelector(getSelectedWorkspace)
 
   const handleInputName = (event) => setName(event.target.value)
   const handleInputText = (event) => setText(event.target.value)
 
   const onAddNoteClick = async () => {
-    if (notesLoading === 'idle') {
+    if (addNoteLoading === 'idle') {
       const board_id = selectedWorkspace?.id
       await dispatch(addNote({ id, access_token, board_id, name, text }))
       handleClose()
@@ -52,22 +53,11 @@ export default function AddNote({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        {notesLoading === 'pending' ? (
-          <Button variant="primary" disabled>
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Loading...</span>
-          </Button>
-        ) : (
-          <Button variant="primary" onClick={onAddNoteClick}>
-            Add Note
-          </Button>
-        )}
+        <Loader
+          loading={addNoteLoading}
+          onClick={onAddNoteClick}
+          buttonText="Add Note"
+        />
       </Modal.Footer>
     </Modal>
   )

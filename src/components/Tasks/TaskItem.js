@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Stack, Button, ListGroup } from 'react-bootstrap'
 import {
@@ -8,13 +9,32 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default function TaskItem({
-  task,
-  type = 'default',
-  onDoneTaskClick,
-  onUnDoneTaskClick,
-  onDeleteTaskClick,
-}) {
+import {
+  updateTask,
+  getUpdateTaskLoading,
+} from '../../features/tasks/tasksSlice'
+import { getUser } from '../../features/user/userSlice'
+
+export default function TaskItem({ task, type = 'default' }) {
+  const dispatch = useDispatch()
+  const { access_token } = useSelector(getUser)
+  const updateTaskLoading = useSelector(getUpdateTaskLoading)
+
+  const onDoneTaskClick = (taskId, status) => {
+    if (updateTaskLoading === 'idle')
+      dispatch(updateTask({ access_token, taskId, status }))
+  }
+
+  const onUnDoneTaskClick = (taskId, status) => {
+    if (updateTaskLoading === 'idle')
+      dispatch(updateTask({ access_token, taskId, status }))
+  }
+
+  const onDeleteTaskClick = (taskId, status) => {
+    if (updateTaskLoading === 'idle')
+      dispatch(updateTask({ access_token, taskId, status }))
+  }
+
   return (
     <ListGroup.Item
       className={

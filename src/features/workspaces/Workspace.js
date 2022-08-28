@@ -5,10 +5,12 @@ import { useParams } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
 import Notes from '../notes/Notes'
+import LoadingWorkspace from '../../components/Workspaces/LoadingWorkspace'
 import WorkspaceModal from '../../components/Workspaces/WorkspaceModal'
 import {
   fetchWorkspace,
   getSelectedWorkspace,
+  getFetchWorkspaceLoading,
   removeSelectedWorkspace,
 } from './workspacesSlice'
 import { getUser } from '../user/userSlice'
@@ -18,6 +20,7 @@ export default function Workspace() {
   const { workspaceId } = useParams()
   const { access_token } = useSelector(getUser)
   const selectedWorkspace = useSelector(getSelectedWorkspace)
+  const fetchWorkspaceLoading = useSelector(getFetchWorkspaceLoading)
   const [show, setShow] = useState(false)
 
   const handleShow = () => setShow(true)
@@ -35,14 +38,19 @@ export default function Workspace() {
   return (
     <>
       <div className="mb-3">
-        <h4 className="mb-3">{selectedWorkspace?.name}</h4>
-        <Button variant="secondary" onClick={handleShow}>
-          Edit Workspace
-        </Button>
+        {fetchWorkspaceLoading === 'pending' ? (
+          <LoadingWorkspace />
+        ) : (
+          <>
+            <h4>{selectedWorkspace?.name}</h4>
+            <Button variant="secondary" onClick={handleShow}>
+              Edit Workspace
+            </Button>
+          </>
+        )}
       </div>
       <Notes workspace={selectedWorkspace} />
-
-      {show ? <WorkspaceModal show={show} handleClose={handleClose} /> : <></>}
+      {show && <WorkspaceModal show={show} handleClose={handleClose} />}
     </>
   )
 }

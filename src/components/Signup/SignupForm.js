@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { Row, Col, Form, Alert, Button, Spinner } from 'react-bootstrap'
+import { Row, Col, Form, Alert } from 'react-bootstrap'
 
+import Loader from '../Loader/Loader'
 import {
   getUserLoading,
   getUserSignupEvent,
@@ -91,22 +92,11 @@ export default function SignupForm({
                 </Form.Control.Feedback>
               </Form.Group>
               <div className="text-center">
-                {userLoading === 'pending' ? (
-                  <Button variant="primary" disabled>
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                    <span className="visually-hidden">Loading...</span>
-                  </Button>
-                ) : (
-                  <Button variant="primary" onClick={onSignupClick}>
-                    Signup
-                  </Button>
-                )}
+                <Loader
+                  loading={userLoading}
+                  onClick={onSignupClick}
+                  buttonText="Signup"
+                />
                 <p className="mt-3">
                   Already have an account? <Link to="/login">Login.</Link>
                 </p>
