@@ -46,10 +46,8 @@ export default function SignupForm({
         ) : (
           <>
             <h3 className="text-center">Signup</h3>
-            {userSignupEvent.errorMessage ? (
+            {userSignupEvent.errorMessage && (
               <Alert variant="warning">{userSignupEvent.errorMessage}</Alert>
-            ) : (
-              <></>
             )}
             <Form>
               <Form.Group className="mb-3" controlId="formGroupUsername">

@@ -26,7 +26,7 @@ export default function Notes() {
     // This will fix a bug: cleanup function never get called
     ;(async () => {
       await dispatch(fetchTasks(access_token))
-      dispatch(fetchNotes(access_token))
+      await dispatch(fetchNotes(access_token))
     })()
   }, [])
 

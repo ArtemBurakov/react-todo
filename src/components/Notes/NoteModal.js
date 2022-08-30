@@ -53,13 +53,9 @@ export default function NoteModal({ show, handleClose }) {
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={name}
-              autoFocus
-              onChange={handleInputName}
-            />
+            <Form.Control type="text" value={name} onChange={handleInputName} />
           </Form.Group>
+          <p className="mb-2">Status</p>
           <ButtonGroup>
             {radios.map((radio, idx) => (
               <ToggleButton
@@ -85,15 +81,11 @@ export default function NoteModal({ show, handleClose }) {
               onChange={handleInputText}
             />
           </Form.Group>
-          {selectedNote.type === 1 ? (
-            <Form.Group>
-              <Form.Label>Tasks</Form.Label>
-              <AddNewTaskInput />
-              <TasksList note={selectedNote} />
-            </Form.Group>
-          ) : (
-            <></>
-          )}
+          <Form.Group>
+            <Form.Label>Tasks</Form.Label>
+            <AddNewTaskInput />
+            <TasksList note={selectedNote} />
+          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>

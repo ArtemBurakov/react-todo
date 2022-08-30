@@ -38,15 +38,10 @@ export default function WorkspaceModal({ show, handleClose }) {
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={name}
-              autoFocus
-              onChange={handleInputName}
-            />
+            <Form.Control type="text" value={name} onChange={handleInputName} />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Actions</Form.Label>
+            <p className="mb-2">Actions</p>
             <Button variant="danger" onClick={() => setStatus(0)}>
               Delete
             </Button>

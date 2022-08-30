@@ -3,7 +3,7 @@ import React from 'react'
 import { Row, Col, Card, Placeholder } from 'react-bootstrap'
 
 export default function LoadingTasksList() {
-  const numberOfNotes = 12
+  const numberOfNotes = 14
 
   return (
     <Row xs={1} md={2} lg={3} className="g-3">

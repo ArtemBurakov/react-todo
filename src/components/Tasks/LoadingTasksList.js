@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 export default function LoadingTasksList() {
-  const numberOfTasks = 6
+  const numberOfTasks = 16
 
   return (
     <ListGroup className="list-group-flush">

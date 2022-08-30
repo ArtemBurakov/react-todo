@@ -5,7 +5,7 @@ import { Form, InputGroup } from 'react-bootstrap'
 
 import Loader from '../Loader/Loader'
 import { getUser } from '../../features/user/userSlice'
-import { getSelectedNote } from '../../features/notes/notesSlice'
+import { getSelectedNote, updateNote } from '../../features/notes/notesSlice'
 import { addTask, getAddTaskLoading } from '../../features/tasks/tasksSlice'
 
 export default function AddNewTaskInput() {
@@ -21,8 +21,12 @@ export default function AddNewTaskInput() {
   const onAddNewTaskClick = async () => {
     if (typeof name === 'string' && name !== '') {
       if (addTaskLoading === 'idle') {
-        const note_id = selectedNote?.id
-        await dispatch(addTask({ id, access_token, note_id, name }))
+        const noteId = selectedNote?.id
+        await dispatch(addTask({ id, access_token, noteId, name }))
+        if (selectedNote?.type === 0) {
+          const type = 1
+          await dispatch(updateNote({ access_token, noteId, type }))
+        }
         setName('')
       }
     } else {

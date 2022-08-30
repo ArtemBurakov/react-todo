@@ -25,10 +25,8 @@ export default function LoginForm({ setUsername, setPassword, onLoginClick }) {
     <Row className="justify-content-center">
       <Col className="col-md-8 col-lg-6">
         <h3 className="text-center">Login</h3>
-        {userLoginEvent.errorMessage ? (
+        {userLoginEvent.errorMessage && (
           <Alert variant="warning">{userLoginEvent.errorMessage}</Alert>
-        ) : (
-          <></>
         )}
         <Form>
           <Form.Group className="mb-3" controlId="formGroupUsername">

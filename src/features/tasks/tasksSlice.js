@@ -27,13 +27,13 @@ export const fetchTasks = createAsyncThunk(
 
 export const addTask = createAsyncThunk(
   'tasks/addTask',
-  async ({ id, access_token, note_id = null, name }, thunkAPI) => {
+  async ({ id, access_token, noteId = null, name }, thunkAPI) => {
     try {
       const { data } = await Api.post(
         `tasks`,
         {
           user_id: id,
-          note_id: note_id,
+          note_id: noteId,
           name: name,
           status: 10,
         },

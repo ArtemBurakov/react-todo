@@ -52,7 +52,7 @@ export const addNote = createAsyncThunk(
 
 export const updateNote = createAsyncThunk(
   'notes/updateNote',
-  async ({ access_token, noteId, name, text, status }, thunkAPI) => {
+  async ({ access_token, noteId, name, text, status, type = 0 }, thunkAPI) => {
     try {
       const { data } = await Api.put(
         `notes/${noteId}`,
@@ -60,6 +60,7 @@ export const updateNote = createAsyncThunk(
           name: name,
           text: text,
           status: status,
+          type: type,
         },
         {
           headers: { Authorization: 'Bearer ' + access_token },

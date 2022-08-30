@@ -3,7 +3,7 @@ import React from 'react'
 import { Row, Col, Card, Placeholder } from 'react-bootstrap'
 
 export default function LoadingWorkspacesList() {
-  const numberOfWorkspaces = 6
+  const numberOfWorkspaces = 16
 
   return (
     <Row xs={1} md={2} lg={3} className="g-3">

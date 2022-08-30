@@ -1,4 +1,5 @@
 import React from 'react'
+import Moment from 'react-moment'
 
 import { Col, Card } from 'react-bootstrap'
 
@@ -12,10 +13,14 @@ export default function NoteItem({ note, onClick }) {
           <Card.Title>{note.name}</Card.Title>
           <Card.Text>{note.text}</Card.Text>
         </Card.Body>
-        {note.type === 1 ? <TasksList note={note} type={'inNote'} /> : <></>}
+        {note.type === 1 && <TasksList note={note} type={'inNote'} />}
         <Card.Footer>
           <small className="text-muted">
-            Last updated {new Date(note.updated_at).toLocaleDateString('en-UK')}
+            Updated{' '}
+            <Moment
+              date={new Date(note.updated_at * 1000)}
+              format="DD/MM/YYYY HH:mm"
+            />
           </small>
         </Card.Footer>
       </Card>

@@ -9,7 +9,7 @@ export default function AppLayout() {
   return (
     <>
       <Header />
-      <Container className="mt-3">
+      <Container className="my-3 flex-grow-1">
         <Outlet />
       </Container>
       <Footer />

@@ -15,22 +15,16 @@ import {
 } from '../../features/tasks/tasksSlice'
 import { getUser } from '../../features/user/userSlice'
 
+const STATUS_ACTIVE = 10
+const STATUS_DONE = 20
+const STATUS_DELETED = 0
+
 export default function TaskItem({ task, type = 'default' }) {
   const dispatch = useDispatch()
   const { access_token } = useSelector(getUser)
   const updateTaskLoading = useSelector(getUpdateTaskLoading)
 
-  const onDoneTaskClick = (taskId, status) => {
-    if (updateTaskLoading === 'idle')
-      dispatch(updateTask({ access_token, taskId, status }))
-  }
-
-  const onUnDoneTaskClick = (taskId, status) => {
-    if (updateTaskLoading === 'idle')
-      dispatch(updateTask({ access_token, taskId, status }))
-  }
-
-  const onDeleteTaskClick = (taskId, status) => {
+  const onUpdateTaskClicked = (taskId, status) => {
     if (updateTaskLoading === 'idle')
       dispatch(updateTask({ access_token, taskId, status }))
   }
@@ -48,7 +42,10 @@ export default function TaskItem({ task, type = 'default' }) {
             <Button
               className="ms-auto"
               variant="outline-primary"
-              onClick={() => onUnDoneTaskClick(task.id, 10)}
+              onClick={(e) => {
+                e.currentTarget.blur()
+                onUpdateTaskClicked(task.id, STATUS_ACTIVE)
+              }}
             >
               <FontAwesomeIcon icon={faRotateBack} />
             </Button>
@@ -56,7 +53,10 @@ export default function TaskItem({ task, type = 'default' }) {
             <Button
               className="ms-auto"
               variant="outline-success"
-              onClick={() => onDoneTaskClick(task.id, 20)}
+              onClick={(e) => {
+                e.currentTarget.blur()
+                onUpdateTaskClicked(task.id, STATUS_DONE)
+              }}
             >
               <FontAwesomeIcon icon={faCheck} />
             </Button>
@@ -64,7 +64,10 @@ export default function TaskItem({ task, type = 'default' }) {
           <div className="vr" />
           <Button
             variant="outline-danger"
-            onClick={() => onDeleteTaskClick(task.id, 0)}
+            onClick={(e) => {
+              e.currentTarget.blur()
+              onUpdateTaskClicked(task.id, STATUS_DELETED)
+            }}
           >
             <FontAwesomeIcon icon={faTrashCan} />
           </Button>
