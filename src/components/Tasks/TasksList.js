@@ -9,7 +9,7 @@ import { getTasks } from '../../features/tasks/tasksSlice'
 
 const TASKS_PER_PAGE = 16
 
-export default function TasksList({ note, type }) {
+export default function TasksList({ note, type, maxTasks = null }) {
   const tasks = useSelector(getTasks)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -26,7 +26,9 @@ export default function TasksList({ note, type }) {
 
     return {
       length: data.length,
-      data: data.slice(firstPageIndex, lastPageIndex),
+      data: maxTasks
+        ? data.slice(0, maxTasks)
+        : data.slice(firstPageIndex, lastPageIndex),
     }
   }, [tasks, currentPage])
 

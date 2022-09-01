@@ -36,7 +36,10 @@ export default function NoteModal({ show, handleClose }) {
   const onSaveChangesClick = async () => {
     if (updateNoteLoading === 'idle') {
       const noteId = selectedNote.id
-      await dispatch(updateNote({ access_token, noteId, name, text, status }))
+      const type = selectedNote.type
+      await dispatch(
+        updateNote({ access_token, noteId, name, text, status, type })
+      )
       handleClose()
     }
   }

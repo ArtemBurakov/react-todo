@@ -1,21 +1,15 @@
 import React, { useState, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Row } from 'react-bootstrap'
 
 import WorkspaceItem from './WorkspaceItem'
 import Pagination from '../Pagination/Pagination'
-import {
-  getWorkspaces,
-  setSelectedWorkspace,
-} from '../../features/workspaces/workspacesSlice'
+import { getWorkspaces } from '../../features/workspaces/workspacesSlice'
 
 const WORKSPACES_PER_PAGE = 16
 
 export default function WorkspacesList() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
   const workspaces = useSelector(getWorkspaces)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -37,14 +31,7 @@ export default function WorkspacesList() {
     <>
       <Row xs={1} md={2} lg={3} className="g-3">
         {filteredData?.data?.map((workspace) => (
-          <WorkspaceItem
-            workspace={workspace}
-            key={workspace.id}
-            onClick={() => {
-              dispatch(setSelectedWorkspace(workspace))
-              navigate(`${workspace.id}`)
-            }}
-          />
+          <WorkspaceItem workspace={workspace} key={workspace.id} />
         ))}
       </Row>
       <Pagination

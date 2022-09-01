@@ -4,13 +4,14 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import { Nav, Navbar, Button, Container } from 'react-bootstrap'
 
-import { removeUser } from '../../features/user/userSlice'
+import Search from '../Search/Search'
+import { getUser, removeUser } from '../../features/user/userSlice'
 
 export default function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const user = useSelector((state) => state.user.user)
+  const user = useSelector(getUser)
 
   const onLogoutClick = () => {
     dispatch(removeUser())
@@ -21,16 +22,23 @@ export default function Header() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          Todo
+          <img
+            alt=""
+            src={require('../../common/logo.svg').default}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}
+          React Todo
         </Navbar.Brand>
-        {user && (
-          <>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav activeKey={location.pathname} className="me-auto">
-                <Nav.Link as={Link} to="/" eventKey="/">
-                  Home
-                </Nav.Link>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav activeKey={location.pathname} className="me-auto">
+            <Nav.Link as={Link} to="/" eventKey="/">
+              Home
+            </Nav.Link>
+            {user && (
+              <>
                 <Nav.Link as={Link} to="tasks" eventKey="/tasks">
                   Tasks
                 </Nav.Link>
@@ -40,13 +48,20 @@ export default function Header() {
                 <Nav.Link as={Link} to="workspaces" eventKey="/workspaces">
                   Workspaces
                 </Nav.Link>
-              </Nav>
-              <Button variant="outline-danger" onClick={onLogoutClick}>
-                Logout
-              </Button>
-            </Navbar.Collapse>
-          </>
-        )}
+              </>
+            )}
+          </Nav>
+          <Search />
+          {user ? (
+            <Button variant="outline-danger" onClick={onLogoutClick}>
+              Logout
+            </Button>
+          ) : (
+            <Button variant="outline-success" as={Link} to="login">
+              Login
+            </Button>
+          )}
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   )

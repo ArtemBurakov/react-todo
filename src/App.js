@@ -13,21 +13,23 @@ import Tasks from './features/tasks/Tasks'
 import Notes from './features/notes/Notes'
 import Workspace from './features/workspaces/Workspace'
 import Workspaces from './features/workspaces/Workspaces'
+import Search from './features/search/Search'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
+        <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route element={<RequireAuth />}>
-          <Route path="/" element={<Home />} />
           <Route path="tasks" element={<Tasks />} />
           <Route path="notes" element={<Notes />} />
           <Route path="workspaces" element={<RequireAuth />}>
             <Route index element={<Workspaces />} />
             <Route path=":workspaceId" element={<Workspace />} />
           </Route>
+          <Route path="search" element={<Search />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

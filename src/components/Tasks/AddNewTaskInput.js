@@ -23,11 +23,11 @@ export default function AddNewTaskInput() {
       if (addTaskLoading === 'idle') {
         const noteId = selectedNote?.id
         await dispatch(addTask({ id, access_token, noteId, name }))
+        setName('')
         if (selectedNote?.type === 0) {
           const type = 1
           await dispatch(updateNote({ access_token, noteId, type }))
         }
-        setName('')
       }
     } else {
       taskInput.current.focus()

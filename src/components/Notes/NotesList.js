@@ -1,26 +1,19 @@
 import React, { useState, useMemo } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Row } from 'react-bootstrap'
 
 import NoteItem from './NoteItem'
-import NoteModal from './NoteModal'
 import Pagination from '../Pagination/Pagination'
-import { getNotes, setSelectedNote } from '../../features/notes/notesSlice'
+import { getNotes } from '../../features/notes/notesSlice'
 import { getSelectedWorkspace } from '../../features/workspaces/workspacesSlice'
 
 const NOTES_PER_PAGE = 14
 
 export default function NotesList({ status }) {
-  const dispatch = useDispatch()
   const notes = useSelector(getNotes)
   const selectedWorkspace = useSelector(getSelectedWorkspace)
   const [currentPage, setCurrentPage] = useState(1)
-
-  const [show, setShow] = useState(false)
-
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
 
   const filteredData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * NOTES_PER_PAGE
@@ -43,17 +36,9 @@ export default function NotesList({ status }) {
 
   return (
     <>
-      {show && <NoteModal show={show} handleClose={handleClose} />}
       <Row xs={1} md={2} lg={3} className="g-3">
         {filteredData?.data?.map((note) => (
-          <NoteItem
-            note={note}
-            key={note.id}
-            onClick={() => {
-              dispatch(setSelectedNote(note))
-              handleShow()
-            }}
-          />
+          <NoteItem note={note} key={note.id} />
         ))}
       </Row>
       <Pagination

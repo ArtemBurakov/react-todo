@@ -52,7 +52,7 @@ export const addNote = createAsyncThunk(
 
 export const updateNote = createAsyncThunk(
   'notes/updateNote',
-  async ({ access_token, noteId, name, text, status, type = 0 }, thunkAPI) => {
+  async ({ access_token, noteId, name, text, status, type }, thunkAPI) => {
     try {
       const { data } = await Api.put(
         `notes/${noteId}`,
