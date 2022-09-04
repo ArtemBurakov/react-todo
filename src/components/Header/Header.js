@@ -51,11 +51,15 @@ export default function Header() {
               </>
             )}
           </Nav>
-          <Search />
           {user ? (
-            <Button variant="outline-danger" onClick={onLogoutClick}>
-              Logout
-            </Button>
+            <>
+              <div className="py-2">
+                <Search />
+              </div>
+              <Button variant="outline-danger" onClick={onLogoutClick}>
+                Logout
+              </Button>
+            </>
           ) : (
             <Button variant="outline-success" as={Link} to="login">
               Login
