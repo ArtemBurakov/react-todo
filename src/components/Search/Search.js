@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import { Form } from 'react-bootstrap'
 
+import './Search.css'
 import {
   getSearchQuery,
   setSearchQuery,
@@ -23,11 +24,11 @@ export default function Search() {
   }
 
   return (
-    <Form className="d-flex">
+    <Form className="search-input-form">
       <Form.Control
         type="search"
         placeholder="Search"
-        className="me-2"
+        className="search-input"
         aria-label="Search"
         value={searchQuery}
         onChange={handleQuery}

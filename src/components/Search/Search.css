@@ -1,0 +1,17 @@
+.search-input-form {
+  display: flex;
+}
+
+.search-input-form .search-input {
+  margin-right: 6px;
+  background: #ebedf0;
+  border: 2px solid transparent;
+}
+
+.search-input-form .search-input:focus,
+.search-input:hover {
+  outline: none !important;
+  box-shadow: none;
+  background: #ffffff;
+  border: 2px solid #06bcee;
+}

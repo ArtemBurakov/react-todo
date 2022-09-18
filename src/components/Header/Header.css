@@ -1,0 +1,29 @@
+.custom-navbar {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.custom-navbar .navbar-brand {
+  margin-right: 36px;
+}
+
+.custom-navbar .navbar-brand img {
+  margin-right: 0.5rem;
+}
+
+.custom-navbar .nav-link {
+  font-size: 17px;
+  color: white;
+}
+
+.custom-navbar .nav-link.active {
+  color: #06bcee !important;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #06bcee;
+}
+
+.custom-navbar .show .logout-button {
+  margin-top: 12px;
+}

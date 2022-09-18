@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { Nav, Navbar, Button, Container } from 'react-bootstrap'
 
 import Search from '../Search/Search'
+import './Header.css'
 import { getUser, removeUser } from '../../features/user/userSlice'
 
 export default function Header() {
@@ -19,7 +20,13 @@ export default function Header() {
   }
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      className="custom-navbar"
+    >
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -53,10 +60,12 @@ export default function Header() {
           </Nav>
           {user ? (
             <>
-              <div className="py-2">
-                <Search />
-              </div>
-              <Button variant="outline-danger" onClick={onLogoutClick}>
+              <Search />
+              <Button
+                className="logout-button"
+                variant="outline-danger"
+                onClick={onLogoutClick}
+              >
                 Logout
               </Button>
             </>
