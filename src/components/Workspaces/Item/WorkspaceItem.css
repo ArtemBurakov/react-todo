@@ -1,0 +1,17 @@
+.card:hover {
+  cursor: pointer;
+}
+
+.add-workspace .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #ebedf0;
+  transition: background-color 0.15s;
+  font-weight: 500;
+}
+
+.add-workspace .card:hover {
+  background: #dfe2e6;
+}

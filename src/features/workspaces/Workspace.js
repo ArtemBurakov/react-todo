@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 
 import Notes from '../notes/Notes'
 import LoadingWorkspace from '../../components/Workspaces/LoadingWorkspace'
-import WorkspaceModal from '../../components/Workspaces/WorkspaceModal'
+import WorkspaceModal from '../../components/Modal/Workspaces/WorkspaceModal'
 import {
   fetchWorkspace,
   getSelectedWorkspace,

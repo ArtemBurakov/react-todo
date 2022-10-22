@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Form, Modal, Button } from 'react-bootstrap'
 
-import Loader from '../Loader/Loader'
+import Loader from '../../Loader/Loader'
 import {
   updateWorkspace,
   getUpdateWorkspaceLoading,
   getSelectedWorkspace,
-} from '../../features/workspaces/workspacesSlice'
-import { getUser } from '../../features/user/userSlice'
+} from '../../../features/workspaces/workspacesSlice'
+import { getUser } from '../../../features/user/userSlice'
 
 export default function WorkspaceModal({ show, handleClose }) {
   const dispatch = useDispatch()

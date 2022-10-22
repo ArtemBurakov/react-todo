@@ -4,7 +4,7 @@ import Moment from 'react-moment'
 
 import { Col, Card } from 'react-bootstrap'
 
-import NoteModal from './NoteModal'
+import NoteModal from '../Modal/Notes/NoteModal'
 import TasksList from '../Tasks/TasksList'
 import { setSelectedNote } from '../../features/notes/notesSlice'
 

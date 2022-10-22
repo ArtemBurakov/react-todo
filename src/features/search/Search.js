@@ -5,7 +5,7 @@ import { Row, ListGroup, Accordion } from 'react-bootstrap'
 
 import TaskItem from '../../components/Tasks/TaskItem'
 import NoteItem from '../../components/Notes/NoteItem'
-import WorkspaceItem from '../../components/Workspaces/WorkspaceItem'
+import WorkspaceItem from '../../components/Workspaces/Item/WorkspaceItem'
 
 import { getUser } from '../user/userSlice'
 import { fetchTasks, getTasks } from '../tasks/tasksSlice'

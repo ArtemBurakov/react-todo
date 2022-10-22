@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { Col, Card } from 'react-bootstrap'
 
-import { setSelectedWorkspace } from '../../features/workspaces/workspacesSlice'
+import './WorkspaceItem.css'
+import { setSelectedWorkspace } from '../../../features/workspaces/workspacesSlice'
 
 export default function WorkspaceItem({ workspace }) {
   const dispatch = useDispatch()
@@ -17,8 +18,8 @@ export default function WorkspaceItem({ workspace }) {
 
   return (
     <Col>
-      <Card>
-        <Card.Body onClick={onWorkspaceItemClick}>{workspace.name}</Card.Body>
+      <Card onClick={onWorkspaceItemClick}>
+        <Card.Body>{workspace.name}</Card.Body>
       </Card>
     </Col>
   )

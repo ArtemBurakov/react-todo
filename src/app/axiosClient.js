@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://192.168.88.23/php-yii2-todo/backend/web/v1/'
+const URL = 'http://192.168.88.26/php-yii2-todo/backend/web/v1/'
 
 export default axios.create({
   baseURL: URL,

@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Form, Modal, Button, ButtonGroup, ToggleButton } from 'react-bootstrap'
 
-import Loader from '../Loader/Loader'
-import TasksList from '../Tasks/TasksList'
-import AddNewTaskInput from '../Tasks/AddNewTaskInput'
+import '../Modal.css'
+import Loader from '../../Loader/Loader'
+import TasksList from '../../Tasks/TasksList'
+import AddNewTaskInput from '../../Tasks/AddNewTaskInput'
 import {
   updateNote,
   getSelectedNote,
   getUpdateNoteLoading,
   removeSelectedNote,
-} from '../../features/notes/notesSlice'
-import { getUser } from '../../features/user/userSlice'
+} from '../../../features/notes/notesSlice'
+import { getUser } from '../../../features/user/userSlice'
 
 export default function NoteModal({ show, handleClose }) {
   const dispatch = useDispatch()

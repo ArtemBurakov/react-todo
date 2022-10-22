@@ -4,6 +4,9 @@ import Api, { handleResponseError } from '../../app/axiosClient'
 const initialState = {
   workspaces: [],
   selectedWorkspace: null,
+  workspaceSortBy: 'recent',
+  workspaceSearchQuery: '',
+  workspaceSearchParam: ['name'],
   error: null,
   fetchWorkspacesLoading: 'idle',
   fetchWorkspaceLoading: 'idle',
@@ -96,6 +99,12 @@ export const workspacesSlice = createSlice({
     removeSelectedWorkspace: (state) => {
       state.selectedWorkspace = null
     },
+    setWorkspaceSortBy: (state, props) => {
+      state.workspaceSortBy = props.payload
+    },
+    setWorkspaceSearchQuery: (state, props) => {
+      state.workspaceSearchQuery = props.payload
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -173,6 +182,11 @@ export const workspacesSlice = createSlice({
 export const getWorkspaces = (state) => state.workspaces.workspaces
 export const getSelectedWorkspace = (state) =>
   state.workspaces.selectedWorkspace
+export const getWorkspaceSortBy = (state) => state.workspaces.workspaceSortBy
+export const getWorkspaceSearchQuery = (state) =>
+  state.workspaces.workspaceSearchQuery
+export const getWorkspaceSearchParam = (state) =>
+  state.workspaces.workspaceSearchParam
 export const getWorkspacesError = (state) => state.workspaces.error
 
 export const getAddWorkspaceLoading = (state) =>
@@ -185,7 +199,11 @@ export const getFetchWorkspacesLoading = (state) =>
   state.workspaces.fetchWorkspacesLoading
 
 // Action creators are generated for each case reducer function
-export const { setSelectedWorkspace, removeSelectedWorkspace } =
-  workspacesSlice.actions
+export const {
+  setSelectedWorkspace,
+  removeSelectedWorkspace,
+  setWorkspaceSortBy,
+  setWorkspaceSearchQuery,
+} = workspacesSlice.actions
 
 export default workspacesSlice.reducer
