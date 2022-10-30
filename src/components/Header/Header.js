@@ -1,81 +1,107 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
-import { Nav, Navbar, Button, Container } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faArrowRightFromBracket,
+  faArrowRightToBracket,
+} from '@fortawesome/free-solid-svg-icons'
 
-import Search from '../Search/Search'
 import './Header.css'
+import Search from '../Search/Search'
 import { getUser, removeUser } from '../../features/user/userSlice'
 
 export default function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const location = useLocation()
   const user = useSelector(getUser)
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false)
 
   const onLogoutClick = () => {
     dispatch(removeUser())
     navigate('login', { replace: true })
   }
 
+  const hideMobileMenu = () => {
+    if (isMobileMenuActive) setIsMobileMenuActive(!isMobileMenuActive)
+  }
+
   return (
-    <Navbar
-      collapseOnSelect
-      expand="lg"
-      bg="dark"
-      variant="dark"
-      className="custom-navbar"
-    >
-      <Container>
-        <Navbar.Brand as={Link} to="/">
-          <img
-            alt=""
-            src={require('../../common/logo.svg').default}
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />{' '}
-          React Todo
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav activeKey={location.pathname} className="me-auto">
-            <Nav.Link as={Link} to="/" eventKey="/">
-              Home
-            </Nav.Link>
-            {user && (
+    <header>
+      <nav className={isMobileMenuActive ? 'mobile-view' : ''}>
+        <div className="nav-container">
+          <NavLink to="/" className="app-logo" onClick={hideMobileMenu}>
+            Todoify
+          </NavLink>
+          <div className="menu">
+            <NavLink to="/">Home</NavLink>
+            {user ? (
               <>
-                <Nav.Link as={Link} to="tasks" eventKey="/tasks">
-                  Tasks
-                </Nav.Link>
-                <Nav.Link as={Link} to="notes" eventKey="/notes">
-                  Notes
-                </Nav.Link>
-                <Nav.Link as={Link} to="workspaces" eventKey="/workspaces">
-                  Workspaces
-                </Nav.Link>
+                <NavLink to="tasks">Tasks</NavLink>
+                <NavLink to="notes">Notes</NavLink>
+                <NavLink to="workspaces">Workspaces</NavLink>
+                <Search />
+                <Button variant="outline-danger" onClick={onLogoutClick}>
+                  <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                </Button>
               </>
+            ) : (
+              <NavLink to="login">Login</NavLink>
             )}
-          </Nav>
-          {user ? (
-            <>
-              <Search />
-              <Button
-                className="logout-button"
-                variant="outline-danger"
-                onClick={onLogoutClick}
-              >
-                Logout
-              </Button>
-            </>
-          ) : (
-            <Button variant="outline-success" as={Link} to="login">
-              Login
-            </Button>
-          )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </div>
+          <button
+            className={`hamburger ${isMobileMenuActive ? 'is-active' : ''}`}
+            onClick={() => {
+              setIsMobileMenuActive(!isMobileMenuActive)
+            }}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+
+      <div className={`mobile-menu ${isMobileMenuActive ? 'is-open' : ''}`}>
+        <NavLink to="/" onClick={hideMobileMenu}>
+          Home
+        </NavLink>
+        {user ? (
+          <>
+            <NavLink to="tasks" onClick={hideMobileMenu}>
+              Tasks
+            </NavLink>
+            <NavLink to="notes" onClick={hideMobileMenu}>
+              Notes
+            </NavLink>
+            <NavLink to="workspaces" onClick={hideMobileMenu}>
+              Workspaces
+            </NavLink>
+            <a
+              href=""
+              className="link-with-image"
+              onClick={() => {
+                hideMobileMenu()
+                onLogoutClick()
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+              <span>Logout</span>
+            </a>
+          </>
+        ) : (
+          <NavLink
+            to="login"
+            className="link-with-image"
+            onClick={hideMobileMenu}
+          >
+            <FontAwesomeIcon icon={faArrowRightToBracket} />
+            <span>Login</span>
+          </NavLink>
+        )}
+      </div>
+    </header>
   )
 }
