@@ -1,0 +1,70 @@
+import React, { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+
+import { Accordion } from 'react-bootstrap'
+
+import {
+  getSelectedWorkspace,
+  getWorkspaces,
+  removeSelectedWorkspace,
+  setSelectedWorkspace,
+} from '../../../features/workspaces/workspacesSlice'
+import {
+  getNotesActiveFilterListItem,
+  getNotesFilterList,
+  setNotesActiveFilterListItem,
+  setNotesActiveFilterStatus,
+} from '../../../features/notes/notesSlice'
+import FilterListItem from './FilterListItem'
+
+export default function NotesFilterList({ onListItemSelect }) {
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const workspaces = useSelector(getWorkspaces)
+  const selectedWorkspace = useSelector(getSelectedWorkspace)
+  const notesFilterList = useSelector(getNotesFilterList)
+  const notesActiveFilterListItem = useSelector(getNotesActiveFilterListItem)
+
+  const filterList = useMemo(
+    () => ({
+      notes: notesFilterList,
+      workspaces:
+        selectedWorkspace && location.pathname !== '/notes'
+          ? null
+          : workspaces.filter(({ status }) => status === 10),
+    }),
+    [notesFilterList, selectedWorkspace, workspaces]
+  )
+
+  const selectHandler = (item) => {
+    if (location.pathname === '/notes') {
+      if (item?.id) dispatch(setSelectedWorkspace(item))
+      else if (selectedWorkspace !== null) dispatch(removeSelectedWorkspace())
+    }
+
+    dispatch(setNotesActiveFilterListItem(item))
+    dispatch(setNotesActiveFilterStatus(item.status))
+
+    if (onListItemSelect !== undefined) onListItemSelect()
+  }
+
+  return (
+    <Accordion defaultActiveKey={['0', '1']} alwaysOpen flush>
+      <FilterListItem
+        title="Notes"
+        data={filterList.notes}
+        onSelect={selectHandler}
+        activeFilter={notesActiveFilterListItem}
+        eventKey="0"
+      />
+      <FilterListItem
+        title="Workspaces"
+        data={filterList.workspaces}
+        onSelect={selectHandler}
+        activeFilter={notesActiveFilterListItem}
+        eventKey="1"
+      />
+    </Accordion>
+  )
+}

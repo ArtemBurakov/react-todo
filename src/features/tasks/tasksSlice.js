@@ -142,7 +142,6 @@ export const getAddTaskLoading = (state) => state.tasks.addTaskLoading
 export const getUpdateTaskLoading = (state) => state.tasks.updateTaskLoading
 export const getFetchTasksLoading = (state) => state.tasks.fetchTasksLoading
 
-// Action creators are generated for each case reducer function
 export const { setSelectedTask } = tasksSlice.actions
 
 export default tasksSlice.reducer

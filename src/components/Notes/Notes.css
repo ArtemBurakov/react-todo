@@ -1,0 +1,13 @@
+.notes-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.notes-header .body {
+  flex: 1;
+}
+
+.notes-header .body h4 {
+  margin-bottom: 0;
+}

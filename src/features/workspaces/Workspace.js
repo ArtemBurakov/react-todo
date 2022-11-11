@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 
+import './../../components/Workspace/Workspace.css'
 import Notes from '../notes/Notes'
 import LoadingWorkspace from '../../components/Workspaces/LoadingWorkspace'
 import WorkspaceModal from '../../components/Modal/Workspaces/WorkspaceModal'
@@ -41,15 +44,15 @@ export default function Workspace() {
         {fetchWorkspaceLoading === 'pending' ? (
           <LoadingWorkspace />
         ) : (
-          <>
+          <div className="workspace-header">
             <h4>{selectedWorkspace?.name}</h4>
-            <Button variant="secondary" onClick={handleShow}>
-              Edit Workspace
+            <Button variant="outline-dark" onClick={handleShow}>
+              <FontAwesomeIcon icon={faPen} />
             </Button>
-          </>
+          </div>
         )}
       </div>
-      <Notes workspace={selectedWorkspace} />
+      <Notes />
       {show && <WorkspaceModal show={show} handleClose={handleClose} />}
     </>
   )

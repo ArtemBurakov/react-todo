@@ -1,9 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Api, { handleResponseError } from '../../app/axiosClient'
 
+const DEFAULT_ACTIVE_FILTER_STATUS = 30
+const DEFAULT_ACTIVE_FILTER_LIST_ITEM = { name: 'All notes', status: 30 }
+
 const initialState = {
   notes: [],
   selectedNote: null,
+  noteSortBy: 'recent',
+  noteSearchQuery: '',
+  noteSearchParam: ['name', 'text'],
+  filterList: {
+    filters: [
+      DEFAULT_ACTIVE_FILTER_LIST_ITEM,
+      { name: 'Active', status: 10 },
+      { name: 'Done', status: 20 },
+      { name: 'Deleted', status: 0 },
+    ],
+    activeFilter: DEFAULT_ACTIVE_FILTER_LIST_ITEM,
+    activeFilterStatus: DEFAULT_ACTIVE_FILTER_STATUS,
+  },
   error: null,
   addNoteLoading: 'idle',
   updateNoteLoading: 'idle',
@@ -84,6 +100,24 @@ export const notesSlice = createSlice({
     removeSelectedNote: (state) => {
       state.selectedNote = null
     },
+    setNoteSortBy: (state, props) => {
+      state.noteSortBy = props.payload
+    },
+    setNoteSearchQuery: (state, props) => {
+      state.noteSearchQuery = props.payload
+    },
+    setNotesActiveFilterListItem: (state, props) => {
+      state.filterList.activeFilter = props.payload
+    },
+    removeNotesActiveFilterListItem: (state) => {
+      state.filterList.activeFilter = DEFAULT_ACTIVE_FILTER_LIST_ITEM
+    },
+    setNotesActiveFilterStatus: (state, props) => {
+      state.filterList.activeFilterStatus = props.payload
+    },
+    removeNotesActiveFilterStatus: (state) => {
+      state.filterList.activeFilterStatus = DEFAULT_ACTIVE_FILTER_STATUS
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -145,11 +179,29 @@ export const getNotes = (state) => state.notes.notes
 export const getNotesError = (state) => state.notes.error
 export const getSelectedNote = (state) => state.notes.selectedNote
 
+export const getNoteSortBy = (state) => state.notes.noteSortBy
+export const getNoteSearchQuery = (state) => state.notes.noteSearchQuery
+export const getNoteSearchParam = (state) => state.notes.noteSearchParam
+
+export const getNotesFilterList = (state) => state.notes.filterList.filters
+export const getNotesActiveFilterListItem = (state) =>
+  state.notes.filterList.activeFilter
+export const getNotesActiveFilterStatus = (state) =>
+  state.notes.filterList.activeFilterStatus
+
 export const getAddNoteLoading = (state) => state.notes.addNoteLoading
 export const getUpdateNoteLoading = (state) => state.notes.updateNoteLoading
 export const getFetchNotesLoading = (state) => state.notes.fetchNotesLoading
 
-// Action creators are generated for each case reducer function
-export const { setSelectedNote, removeSelectedNote } = notesSlice.actions
+export const {
+  setSelectedNote,
+  removeSelectedNote,
+  setNoteSortBy,
+  setNoteSearchQuery,
+  setNotesActiveFilterListItem,
+  removeNotesActiveFilterListItem,
+  setNotesActiveFilterStatus,
+  removeNotesActiveFilterStatus,
+} = notesSlice.actions
 
 export default notesSlice.reducer

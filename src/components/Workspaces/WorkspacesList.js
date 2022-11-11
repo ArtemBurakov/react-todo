@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 
 import { Row } from 'react-bootstrap'
 
-import Pagination from '../Pagination/Pagination'
-import WorkspaceItem from './Item/WorkspaceItem'
-import AddNewWorkspaceItem from './Item/AddNewWorkspaceItem'
 import AddWorkspace from './AddWorkspace'
+import WorkspaceItem from './Item/WorkspaceItem'
+import Pagination from '../Pagination/Pagination'
+import AddNewWorkspaceItem from './Item/AddNewWorkspaceItem'
 import {
   getWorkspaces,
   getWorkspaceSearchParam,
@@ -33,38 +33,26 @@ export default function WorkspacesList() {
 
     const data = workspaces
       .filter((workspace) => workspace.status === 10)
-      .filter((item) => {
-        return searchParam?.some((newItem) => {
-          return (
+      .filter((item) =>
+        searchParam?.some(
+          (newItem) =>
             item[newItem]
               ?.toString()
               ?.toLowerCase()
               ?.indexOf(searchQuery.toLowerCase()) > -1
-          )
-        })
-      })
-    switch (sortBy) {
-      case 'recent':
-        data.sort((a, b) => b.updated_at - a.updated_at)
-        break
-      case 'oldest':
-        data.sort((a, b) => a.updated_at - b.updated_at)
-        break
-      case 'aToZ':
-        data.sort()
-        break
-      case 'zToA':
-        data.sort().reverse()
-        break
-      default:
-        data.sort((a, b) => b.updated_at - a.updated_at)
-    }
+        )
+      )
+
+    if (sortBy === 'recent') data.sort((a, b) => b.updated_at - a.updated_at)
+    if (sortBy === 'oldest') data.sort((a, b) => a.updated_at - b.updated_at)
+    if (sortBy === 'aToZ') data.sort()
+    if (sortBy === 'zToA') data.sort().reverse()
 
     return {
       length: data.length,
       data: data.slice(firstPageIndex, lastPageIndex),
     }
-  }, [workspaces, currentPage, sortBy, searchQuery])
+  }, [currentPage, workspaces, sortBy, searchParam, searchQuery])
 
   return (
     <>

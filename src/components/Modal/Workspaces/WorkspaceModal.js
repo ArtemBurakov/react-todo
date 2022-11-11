@@ -11,6 +11,8 @@ import {
 } from '../../../features/workspaces/workspacesSlice'
 import { getUser } from '../../../features/user/userSlice'
 
+const DELETED_WORKSPACE_STATUS = 0
+
 export default function WorkspaceModal({ show, handleClose }) {
   const dispatch = useDispatch()
   const { access_token } = useSelector(getUser)
@@ -22,11 +24,11 @@ export default function WorkspaceModal({ show, handleClose }) {
 
   const handleInputName = (event) => setName(event.target.value)
 
-  const onSaveChangesClick = async () => {
+  const onSaveChangesClick = async (workspaceStatus = status) => {
     if (updateWorkspaceLoading === 'idle') {
       const workspaceId = selectedWorkspace.id
       await dispatch(
-        updateWorkspace({ access_token, workspaceId, name, status })
+        updateWorkspace({ access_token, workspaceId, name, workspaceStatus })
       )
       handleClose()
     }
@@ -42,7 +44,12 @@ export default function WorkspaceModal({ show, handleClose }) {
           </Form.Group>
           <Form.Group className="mb-3">
             <p className="mb-2">Actions</p>
-            <Button variant="danger" onClick={() => setStatus(0)}>
+            <Button
+              variant="danger"
+              onClick={() => {
+                onSaveChangesClick(DELETED_WORKSPACE_STATUS)
+              }}
+            >
               Delete
             </Button>
           </Form.Group>

@@ -1,0 +1,9 @@
+.workspace-header {
+  display: flex;
+  align-items: center;
+}
+
+.workspace-header h4 {
+  flex: 1;
+  margin-bottom: 0;
+}

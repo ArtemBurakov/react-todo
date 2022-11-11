@@ -107,7 +107,6 @@ export const getUserLoading = (state) => state.user.loading
 export const getUserLoginEvent = (state) => state.user.login
 export const getUserSignupEvent = (state) => state.user.signup
 
-// Action creators are generated for each case reducer function
 export const { setUserFromLocalStorage, removeUser } = userSlice.actions
 
 export default userSlice.reducer

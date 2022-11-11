@@ -23,20 +23,22 @@ export default function Workspaces() {
     dispatch(fetchWorkspaces(access_token))
   }, [])
 
+  if (responseError)
+    return (
+      <>
+        <h4>Workspaces</h4>
+        <Alert variant="warning">{responseError}</Alert>
+      </>
+    )
+
   return (
     <>
-      {responseError ? (
-        <Alert variant="warning">{responseError}</Alert>
+      <h4>Workspaces</h4>
+      <WorkspacesFilterForm />
+      {fetchWorkspacesLoading === 'pending' ? (
+        <LoadingWorkspacesList />
       ) : (
-        <>
-          <h4>Workspaces</h4>
-          <WorkspacesFilterForm />
-          {fetchWorkspacesLoading === 'pending' ? (
-            <LoadingWorkspacesList />
-          ) : (
-            <WorkspacesList />
-          )}
-        </>
+        <WorkspacesList />
       )}
     </>
   )

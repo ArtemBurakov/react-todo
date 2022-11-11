@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Row, Col, Nav, Tab, Alert, Button } from 'react-bootstrap'
+import { Row, Col, Alert, Button } from 'react-bootstrap'
 
+import './../../components/Notes/Notes.css'
 import AddNote from '../../components/Notes/AddNote'
-import LoadingNotesList from '../../components/Notes/LoadingNotesList'
 import NotesList from '../../components/Notes/NotesList'
-import { fetchNotes, getNotesError, getFetchNotesLoading } from './notesSlice'
-import { fetchTasks, getFetchTasksLoading } from '../tasks/tasksSlice'
+import LoadingNotesList from '../../components/Notes/LoadingNotesList'
+import NotesOffCanvas from '../../components/Notes/NotesOffCanvas'
+import NotesFilterForm from '../../components/Notes/NotesFilterForm'
+import NotesFilterList from '../../components/Notes/FilterList/NotesFilterList'
 import { getUser } from '../user/userSlice'
+import {
+  fetchNotes,
+  getNotesError,
+  getFetchNotesLoading,
+  removeNotesActiveFilterListItem,
+  removeNotesActiveFilterStatus,
+} from './notesSlice'
+import { fetchWorkspaces } from '../workspaces/workspacesSlice'
+import { fetchTasks, getFetchTasksLoading } from '../tasks/tasksSlice'
 
 export default function Notes() {
   const dispatch = useDispatch()
@@ -22,63 +33,54 @@ export default function Notes() {
   const handleClose = () => setShow(false)
 
   useEffect(() => {
-    // Using the async IIFE function
-    // This will fix a bug: cleanup function never get called
     ;(async () => {
+      await dispatch(fetchWorkspaces(access_token))
       await dispatch(fetchTasks(access_token))
       await dispatch(fetchNotes(access_token))
     })()
+
+    return () => {
+      dispatch(removeNotesActiveFilterStatus())
+      dispatch(removeNotesActiveFilterListItem())
+    }
   }, [])
+
+  if (responseError)
+    return (
+      <>
+        <h4>Notes</h4>
+        <Alert variant="warning">{responseError}</Alert>
+      </>
+    )
 
   return (
     <>
-      <h4>Your notes list</h4>
-      <Tab.Container defaultActiveKey="10">
-        <Row>
-          <Col md={3} className="mb-md-0 mb-3">
-            <Nav variant="pills" className="flex-md-column">
-              <Nav.Item>
-                <Nav.Link eventKey="10">Active</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="20">Done</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="0">Deleted</Nav.Link>
-              </Nav.Item>
-              <Button variant="success" onClick={handleShow}>
-                Add new note
-              </Button>
-            </Nav>
-          </Col>
-          <Col md={9}>
-            <Tab.Content>
-              {responseError ? (
-                <Alert variant="warning">{responseError}</Alert>
-              ) : (
-                <>
-                  {fetchNotesLoading === 'pending' ||
-                  tasksFetchLoading === 'pending' ? (
-                    <LoadingNotesList />
-                  ) : (
-                    <>
-                      <Tab.Pane eventKey="10">
-                        <NotesList status={10} />
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="20">
-                        <NotesList status={20} />
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="0">
-                        <NotesList status={0} />
-                      </Tab.Pane>
-                    </>
-                  )}
-                </>
-              )}
-            </Tab.Content>
-          </Col>
-        </Row>
-      </Tab.Container>
+      <Row className="mb-3">
+        <div className="notes-header">
+          <div className="offcanvas-button">
+            <NotesOffCanvas />
+          </div>
+          <div className="body">
+            <h4>Notes</h4>
+          </div>
+          <div className="create-button">
+            <Button onClick={handleShow}>Create new</Button>
+          </div>
+        </div>
+      </Row>
+      <Row>
+        <Col md={3} className="mb-md-0 mb-3 d-lg-block d-md-block d-none">
+          <NotesFilterList />
+        </Col>
+        <Col md={9}>
+          <NotesFilterForm />
+          {[fetchNotesLoading, tasksFetchLoading].includes('pending') ? (
+            <LoadingNotesList />
+          ) : (
+            <NotesList />
+          )}
+        </Col>
+      </Row>
       {show && <AddNote show={show} handleClose={handleClose} />}
     </>
   )

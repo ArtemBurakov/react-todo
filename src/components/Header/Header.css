@@ -2,14 +2,7 @@ nav {
   position: relative;
   z-index: 99;
   padding: 1rem 1.5rem;
-  background-color: #000;
-}
-
-nav.mobile-view {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  background-color: var(--dark);
 }
 
 .app-logo {
@@ -17,7 +10,7 @@ nav.mobile-view {
   font-weight: 900;
   margin-bottom: 0;
   margin-right: 2rem;
-  color: white;
+  color: var(--light);
   cursor: pointer;
   letter-spacing: 2px;
   text-decoration: none;
@@ -25,7 +18,7 @@ nav.mobile-view {
 }
 
 .app-logo:hover {
-  color: white;
+  color: var(--light);
 }
 
 .nav-container {
@@ -43,7 +36,7 @@ nav.mobile-view {
 
 .menu a {
   margin: 0 1rem;
-  color: white;
+  color: var(--light);
   font-size: 17px;
   font-weight: 500;
   text-decoration: none;
@@ -51,11 +44,11 @@ nav.mobile-view {
 }
 
 .menu a.active {
-  color: #06bcee;
+  color: var(--primary);
 }
 
 .menu a:hover {
-  color: #06bcee;
+  color: var(--primary);
 }
 
 .hamburger {
@@ -77,7 +70,7 @@ nav.mobile-view {
   height: 4px;
   position: relative;
   margin-bottom: 5px;
-  background-color: #fff;
+  background-color: var(--light);
   border-radius: 6px;
   z-index: 1;
   transform-origin: 0 0;
@@ -86,7 +79,7 @@ nav.mobile-view {
 
 .hamburger:hover span:nth-child(2) {
   transform: translateX(10px);
-  background-color: #06bcee;
+  background-color: var(--primary);
 }
 
 .hamburger.is-active span:nth-child(1) {
@@ -103,7 +96,7 @@ nav.mobile-view {
 }
 
 .hamburger.is-active:hover span {
-  background-color: #06bcee;
+  background-color: var(--primary);
 }
 
 .mobile-menu {
@@ -116,8 +109,8 @@ nav.mobile-view {
   padding-top: 5rem;
   opacity: 0;
   transform: translateY(-100%);
-  background-color: #000;
-  color: #fff;
+  background-color: var(--dark);
+  color: var(--light);
   transition: 0.4s;
 }
 
@@ -129,7 +122,7 @@ nav.mobile-view {
 .mobile-menu a {
   display: block;
   padding: 1rem;
-  color: #fff;
+  color: var(--light);
   font-weight: 500;
   text-align: center;
   text-decoration: none;
@@ -142,12 +135,12 @@ nav.mobile-view {
 }
 
 .mobile-menu a.active {
-  color: #06bcee;
+  color: var(--primary);
 }
 
 .mobile-menu a:hover {
-  color: #000;
-  background-color: #fff;
+  color: var(--dark);
+  background-color: var(--light);
 }
 
 @media (min-width: 768px) {
@@ -158,5 +151,14 @@ nav.mobile-view {
 
   .menu {
     display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  nav.mobile-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 }

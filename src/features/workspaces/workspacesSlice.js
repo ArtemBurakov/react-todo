@@ -69,13 +69,13 @@ export const addWorkspace = createAsyncThunk(
 
 export const updateWorkspace = createAsyncThunk(
   'workspaces/updateWorkspace',
-  async ({ access_token, workspaceId, name, status }, thunkAPI) => {
+  async ({ access_token, workspaceId, name, workspaceStatus }, thunkAPI) => {
     try {
       const { data } = await Api.put(
         `workspaces/${workspaceId}`,
         {
           name: name,
-          status: status,
+          status: workspaceStatus,
         },
         {
           headers: { Authorization: 'Bearer ' + access_token },
@@ -198,7 +198,6 @@ export const getFetchWorkspaceLoading = (state) =>
 export const getFetchWorkspacesLoading = (state) =>
   state.workspaces.fetchWorkspacesLoading
 
-// Action creators are generated for each case reducer function
 export const {
   setSelectedWorkspace,
   removeSelectedWorkspace,
