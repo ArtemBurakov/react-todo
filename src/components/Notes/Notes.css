@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+.notes-header .create-button button {
+  margin-left: 10px;
+}
+
+.notes-header .offcanvas-button {
+  margin-right: 10px;
+}
+
 .notes-header .body {
   flex: 1;
 }

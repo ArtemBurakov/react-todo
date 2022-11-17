@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 import { Row, Col, Alert, Button } from 'react-bootstrap'
 
@@ -23,6 +24,7 @@ import { fetchTasks, getFetchTasksLoading } from '../tasks/tasksSlice'
 
 export default function Notes() {
   const dispatch = useDispatch()
+  const location = useLocation()
   const [show, setShow] = useState(false)
   const { access_token } = useSelector(getUser)
   const responseError = useSelector(getNotesError)
@@ -55,19 +57,21 @@ export default function Notes() {
 
   return (
     <>
-      <Row className="mb-3">
-        <div className="notes-header">
-          <div className="offcanvas-button">
-            <NotesOffCanvas />
+      {location.pathname === '/notes' && (
+        <Row className="mb-3">
+          <div className="notes-header">
+            <div className="offcanvas-button">
+              <NotesOffCanvas />
+            </div>
+            <div className="body">
+              <h4>Notes</h4>
+            </div>
+            <div className="create-button">
+              <Button onClick={handleShow}>Create new</Button>
+            </div>
           </div>
-          <div className="body">
-            <h4>Notes</h4>
-          </div>
-          <div className="create-button">
-            <Button onClick={handleShow}>Create new</Button>
-          </div>
-        </div>
-      </Row>
+        </Row>
+      )}
       <Row>
         <Col md={3} className="mb-md-0 mb-3 d-lg-block d-md-block d-none">
           <NotesFilterList />

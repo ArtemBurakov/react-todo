@@ -38,7 +38,7 @@ export default function TaskItem({ task, type = 'default' }) {
     >
       {type === 'default' ? (
         <Stack direction="horizontal" gap={3}>
-          {task.name}
+          <div className="text-truncate">{task.name}</div>
           {task.status === 20 && (
             <Button
               className="ms-auto"

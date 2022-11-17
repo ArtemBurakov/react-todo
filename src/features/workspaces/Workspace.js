@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { Button } from 'react-bootstrap'
+import { Button, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 
 import './../../components/Workspace/Workspace.css'
 import Notes from '../notes/Notes'
+import AddNote from '../../components/Notes/AddNote'
+import NotesOffCanvas from '../../components/Notes/NotesOffCanvas'
 import LoadingWorkspace from '../../components/Workspaces/LoadingWorkspace'
 import WorkspaceModal from '../../components/Modal/Workspaces/WorkspaceModal'
 import {
@@ -24,10 +26,14 @@ export default function Workspace() {
   const { access_token } = useSelector(getUser)
   const selectedWorkspace = useSelector(getSelectedWorkspace)
   const fetchWorkspaceLoading = useSelector(getFetchWorkspaceLoading)
-  const [show, setShow] = useState(false)
+  const [showWorkspaceModal, setShowWorkspaceModal] = useState(false)
+  const [showAddNoteModal, setShowAddNoteModal] = useState(false)
 
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  const handleShowWorkspaceModal = () => setShowWorkspaceModal(true)
+  const handleCloseWorkspaceModal = () => setShowWorkspaceModal(false)
+
+  const handleShowAddNoteModal = () => setShowAddNoteModal(true)
+  const handleCloseAddNoteModal = () => setShowAddNoteModal(false)
 
   useEffect(() => {
     if (!selectedWorkspace)
@@ -44,16 +50,40 @@ export default function Workspace() {
         {fetchWorkspaceLoading === 'pending' ? (
           <LoadingWorkspace />
         ) : (
-          <div className="workspace-header">
-            <h4>{selectedWorkspace?.name}</h4>
-            <Button variant="outline-dark" onClick={handleShow}>
-              <FontAwesomeIcon icon={faPen} />
-            </Button>
-          </div>
+          <Row className="mb-3">
+            <div className="notes-header">
+              <div className="offcanvas-button">
+                <NotesOffCanvas />
+              </div>
+              <div className="body text-truncate">
+                <h4>{selectedWorkspace?.name}</h4>
+              </div>
+              <div className="create-button">
+                <Button
+                  variant="outline-dark"
+                  onClick={handleShowWorkspaceModal}
+                >
+                  <FontAwesomeIcon icon={faPen} />
+                </Button>
+                <Button onClick={handleShowAddNoteModal}>Create new</Button>
+              </div>
+            </div>
+          </Row>
         )}
       </div>
       <Notes />
-      {show && <WorkspaceModal show={show} handleClose={handleClose} />}
+      {showWorkspaceModal && (
+        <WorkspaceModal
+          show={showWorkspaceModal}
+          handleClose={handleCloseWorkspaceModal}
+        />
+      )}
+      {showAddNoteModal && (
+        <AddNote
+          show={showAddNoteModal}
+          handleClose={handleCloseAddNoteModal}
+        />
+      )}
     </>
   )
 }

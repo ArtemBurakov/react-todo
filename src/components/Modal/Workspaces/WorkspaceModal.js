@@ -61,7 +61,9 @@ export default function WorkspaceModal({ show, handleClose }) {
         </Button>
         <Loader
           loading={updateWorkspaceLoading}
-          onClick={onSaveChangesClick}
+          onClick={() => {
+            onSaveChangesClick()
+          }}
           buttonText="Save Changes"
         />
       </Modal.Footer>
