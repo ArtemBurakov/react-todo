@@ -23,12 +23,9 @@ export default function FilterListItem({
                 action
                 key={item.name}
                 onClick={() => onSelect(item)}
-                className={classNames(
-                  'border-0 rounded text-truncate custom-list-item',
-                  {
-                    'text-primary fw-bold': activeFilter.name === item.name,
-                  }
-                )}
+                className={classNames('border-0 rounded text-truncate mb-1', {
+                  'text-primary fw-bold': activeFilter.name === item.name,
+                })}
               >
                 {item.name}
               </ListGroup.Item>

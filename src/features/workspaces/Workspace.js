@@ -51,12 +51,12 @@ export default function Workspace() {
           <LoadingWorkspace />
         ) : (
           <Row className="mb-3">
-            <div className="notes-header">
+            <div className="workspace-header">
               <div className="offcanvas-button">
                 <NotesOffCanvas />
               </div>
-              <div className="body text-truncate">
-                <h4>{selectedWorkspace?.name}</h4>
+              <div className="body text-truncate h4">
+                {selectedWorkspace?.name}
               </div>
               <div className="create-button">
                 <Button

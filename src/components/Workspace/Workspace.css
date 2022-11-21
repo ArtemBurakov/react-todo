@@ -1,9 +1,18 @@
 .workspace-header {
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
-.workspace-header h4 {
+.workspace-header .create-button button {
+  margin-left: 10px;
+}
+
+.workspace-header .offcanvas-button {
+  margin-right: 10px;
+}
+
+.workspace-header .body {
   flex: 1;
   margin-bottom: 0;
 }

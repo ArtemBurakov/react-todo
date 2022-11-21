@@ -1,7 +1,7 @@
 :root {
-  --primary: #7f2ccb;
-  --light: #ffffff;
-  --dark: #0b0c10;
+  --primary: #fff;
+  --light: #6c757d;
+  --dark: #212529;
 }
 
 body {

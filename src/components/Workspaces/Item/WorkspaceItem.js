@@ -19,7 +19,7 @@ export default function WorkspaceItem({ workspace }) {
   return (
     <Col>
       <Card onClick={onWorkspaceItemClick}>
-        <Card.Body>{workspace.name}</Card.Body>
+        <Card.Body className={'fw-bold'}>{workspace.name}</Card.Body>
       </Card>
     </Col>
   )

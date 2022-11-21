@@ -25,7 +25,7 @@ const CustomPagination = ({
   const lastPage = paginationRange[paginationRange.length - 1]
 
   return (
-    <Pagination className="mt-3">
+    <Pagination className="mt-3 mb-0">
       <Pagination.Prev disabled={currentPage === 1} onClick={onPrevious} />
       {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) return <Pagination.Ellipsis />

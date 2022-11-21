@@ -32,7 +32,9 @@ export default function NotesFilterList({ onListItemSelect }) {
       workspaces:
         selectedWorkspace && location.pathname !== '/notes'
           ? null
-          : workspaces.filter(({ status }) => status === 10),
+          : workspaces
+              .filter(({ status }) => status === 10)
+              .sort((a, b) => b.updated_at - a.updated_at),
     }),
     [notesFilterList, selectedWorkspace, workspaces]
   )
