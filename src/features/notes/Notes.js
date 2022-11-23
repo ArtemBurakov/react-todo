@@ -73,10 +73,14 @@ export default function Notes() {
         </Row>
       )}
       <Row>
-        <Col md={3} className="mb-md-0 mb-3 d-lg-block d-md-block d-none">
+        <Col
+          lg={3}
+          md={4}
+          className="mb-md-0 mb-3 d-lg-block d-md-block d-none"
+        >
           <NotesFilterList />
         </Col>
-        <Col md={9}>
+        <Col lg={9} md={8}>
           <NotesFilterForm />
           {[fetchNotesLoading, tasksFetchLoading].includes('pending') ? (
             <LoadingNotesList />

@@ -10,7 +10,7 @@ nav {
   font-weight: 900;
   margin-bottom: 0;
   margin-right: 2rem;
-  color: var(--primary);
+  color: var(--light);
   cursor: pointer;
   letter-spacing: 2px;
   text-decoration: none;
@@ -18,7 +18,7 @@ nav {
 }
 
 .app-logo:hover {
-  color: var(--primary);
+  color: var(--light);
 }
 
 .nav-container {

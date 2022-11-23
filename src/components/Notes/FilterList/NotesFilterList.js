@@ -18,7 +18,7 @@ import {
 } from '../../../features/notes/notesSlice'
 import FilterListItem from './FilterListItem'
 
-export default function NotesFilterList({ onListItemSelect }) {
+export default function NotesFilterList({ onListItemSelect, flush = false }) {
   const dispatch = useDispatch()
   const location = useLocation()
   const workspaces = useSelector(getWorkspaces)
@@ -52,21 +52,23 @@ export default function NotesFilterList({ onListItemSelect }) {
   }
 
   return (
-    <Accordion defaultActiveKey={['0', '1']} alwaysOpen flush>
-      <FilterListItem
-        title="Notes"
-        data={filterList.notes}
-        onSelect={selectHandler}
-        activeFilter={notesActiveFilterListItem}
-        eventKey="0"
-      />
-      <FilterListItem
-        title="Workspaces"
-        data={filterList.workspaces}
-        onSelect={selectHandler}
-        activeFilter={notesActiveFilterListItem}
-        eventKey="1"
-      />
-    </Accordion>
+    <div className="accordion-container">
+      <Accordion defaultActiveKey={['0', '1']} alwaysOpen flush={flush}>
+        <FilterListItem
+          title="Notes"
+          data={filterList.notes}
+          onSelect={selectHandler}
+          activeFilter={notesActiveFilterListItem}
+          eventKey="0"
+        />
+        <FilterListItem
+          title="Workspaces"
+          data={filterList.workspaces}
+          onSelect={selectHandler}
+          activeFilter={notesActiveFilterListItem}
+          eventKey="1"
+        />
+      </Accordion>
+    </div>
   )
 }

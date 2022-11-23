@@ -29,7 +29,7 @@ export default function Header() {
   }
 
   return (
-    <header>
+    <header className="border-bottom">
       <nav className={isMobileMenuActive ? 'mobile-view' : ''}>
         <div className="nav-container">
           <NavLink to="/" className="app-logo" onClick={hideMobileMenu}>

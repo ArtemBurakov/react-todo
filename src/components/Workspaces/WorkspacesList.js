@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
-import { Row } from 'react-bootstrap'
+import Masonry from 'react-masonry-css'
 
 import AddWorkspace from './AddWorkspace'
 import WorkspaceItem from './Item/WorkspaceItem'
@@ -13,6 +13,7 @@ import {
   getWorkspaceSearchQuery,
   getWorkspaceSortBy,
 } from '../../features/workspaces/workspacesSlice'
+import { workspacesBreakpointColumns } from './WorkspacesBreakepointColumns'
 
 const WORKSPACES_PER_PAGE = 17
 
@@ -56,12 +57,16 @@ export default function WorkspacesList() {
 
   return (
     <>
-      <Row xs={1} md={2} lg={3} className="g-3 mt-0">
+      <Masonry
+        breakpointCols={workspacesBreakpointColumns}
+        className="masonry-grid"
+        columnClassName="masonry-grid_column"
+      >
         <AddNewWorkspaceItem handleShow={handleShow} />
         {filteredData?.data?.map((workspace) => (
           <WorkspaceItem workspace={workspace} key={workspace.id} />
         ))}
-      </Row>
+      </Masonry>
       <Pagination
         currentPage={currentPage}
         totalCount={filteredData.length}

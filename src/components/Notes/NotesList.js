@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
-import { Row } from 'react-bootstrap'
+import Masonry from 'react-masonry-css'
 
 import NoteItem from './NoteItem'
 import Pagination from '../Pagination/Pagination'
@@ -13,6 +13,7 @@ import {
   getNotesActiveFilterStatus,
 } from '../../features/notes/notesSlice'
 import { getSelectedWorkspace } from '../../features/workspaces/workspacesSlice'
+import { notesBreakpointColumns } from './NotesBreakepointColumns'
 
 const NOTES_PER_PAGE = 15
 
@@ -63,11 +64,15 @@ export default function NotesList() {
 
   return (
     <>
-      <Row xs={1} md={2} lg={3} className="g-3">
+      <Masonry
+        breakpointCols={notesBreakpointColumns}
+        className="masonry-grid"
+        columnClassName="masonry-grid_column"
+      >
         {filteredData?.data?.map((note) => (
           <NoteItem note={note} key={note.id} />
         ))}
-      </Row>
+      </Masonry>
       <Pagination
         currentPage={currentPage}
         totalCount={filteredData.length}

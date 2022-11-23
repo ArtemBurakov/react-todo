@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Row, ListGroup, Accordion } from 'react-bootstrap'
+import Masonry from 'react-masonry-css'
+import { ListGroup, Accordion } from 'react-bootstrap'
 
 import TaskItem from '../../components/Tasks/TaskItem'
 import NoteItem from '../../components/Notes/NoteItem'
 import WorkspaceItem from '../../components/Workspaces/Item/WorkspaceItem'
+import { notesBreakpointColumns } from './../../components/Notes/NotesBreakepointColumns'
+import { workspacesBreakpointColumns } from './../../components/Workspaces/WorkspacesBreakepointColumns'
 
 import { getUser } from '../user/userSlice'
 import { fetchTasks, getTasks } from '../tasks/tasksSlice'
@@ -37,8 +40,6 @@ export default function Search() {
   }
 
   useEffect(() => {
-    // Using the async IIFE function
-    // This will fix a bug: cleanup function never get called
     ;(async () => {
       await dispatch(fetchTasks(access_token))
       await dispatch(fetchNotes(access_token))
@@ -65,21 +66,29 @@ export default function Search() {
       <Accordion.Item eventKey="1">
         <Accordion.Header>Notes</Accordion.Header>
         <Accordion.Body>
-          <Row xs={1} md={2} lg={3} className="g-3">
+          <Masonry
+            breakpointCols={notesBreakpointColumns}
+            className="masonry-grid"
+            columnClassName="masonry-grid_column"
+          >
             {search(notes).map((note) => (
               <NoteItem key={note.id} note={note} />
             ))}
-          </Row>
+          </Masonry>
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="2">
         <Accordion.Header>Workspaces</Accordion.Header>
         <Accordion.Body>
-          <Row xs={1} md={2} lg={3} className="g-3">
+          <Masonry
+            breakpointCols={workspacesBreakpointColumns}
+            className="masonry-grid"
+            columnClassName="masonry-grid_column"
+          >
             {search(workspaces).map((workspace) => (
               <WorkspaceItem key={workspace.id} workspace={workspace} />
             ))}
-          </Row>
+          </Masonry>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

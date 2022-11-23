@@ -24,7 +24,7 @@ export default function NotesOffCanvas() {
           closeButton
         ></Offcanvas.Header>
         <Offcanvas.Body className="p-0 d-md-none">
-          <NotesFilterList onListItemSelect={handleClose} />
+          <NotesFilterList onListItemSelect={handleClose} flush={true} />
         </Offcanvas.Body>
       </Offcanvas>
     </>

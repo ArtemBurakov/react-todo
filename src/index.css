@@ -1,7 +1,7 @@
 :root {
-  --primary: #fff;
-  --light: #6c757d;
-  --dark: #212529;
+  --primary: #0d6efd;
+  --light: #000;
+  --dark: #fff;
 }
 
 body {
@@ -16,4 +16,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.masonry-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -16px;
+  width: auto;
+}
+.masonry-grid_column {
+  padding-left: 16px;
+  background-clip: padding-box;
+}
+
+.masonry-grid_column > div {
+  margin-bottom: 16px;
 }

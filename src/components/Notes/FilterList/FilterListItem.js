@@ -23,7 +23,7 @@ export default function FilterListItem({
                 action
                 key={item.name}
                 onClick={() => onSelect(item)}
-                className={classNames('border-0 rounded text-truncate mb-1', {
+                className={classNames('border-0 rounded text-truncate', {
                   'text-primary fw-bold': activeFilter.name === item.name,
                 })}
               >
