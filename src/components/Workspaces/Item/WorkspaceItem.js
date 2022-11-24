@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Col, Card } from 'react-bootstrap'
 
 import './WorkspaceItem.css'
+
 import { setSelectedWorkspace } from '../../../features/workspaces/workspacesSlice'
 
 export default function WorkspaceItem({ workspace }) {

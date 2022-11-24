@@ -5,6 +5,7 @@ import { ListGroup } from 'react-bootstrap'
 
 import TaskItem from './TaskItem'
 import Pagination from '../Pagination/Pagination'
+
 import { getTasks } from '../../features/tasks/tasksSlice'
 
 const TASKS_PER_PAGE = 16

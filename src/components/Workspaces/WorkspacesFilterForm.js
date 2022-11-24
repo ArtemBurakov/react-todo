@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Row, Col } from 'react-bootstrap'
 
+import SearchFormComponent from '../Forms/Search/SearchFormComponent'
+import FilterFormComponent from '../Forms/Filter/FilterFormComponent'
+
 import {
   getWorkspaceSearchQuery,
   getWorkspaceSortBy,
   setWorkspaceSearchQuery,
   setWorkspaceSortBy,
 } from '../../features/workspaces/workspacesSlice'
-import SearchFormComponent from '../Forms/Search/SearchFormComponent'
-import FilterFormComponent from '../Forms/Filter/FilterFormComponent'
 
 export default function WorkspacesFilterForm() {
   const dispatch = useDispatch()

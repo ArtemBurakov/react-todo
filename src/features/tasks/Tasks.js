@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Alert } from 'react-bootstrap'
 
 import TasksList from '../../components/Tasks/TasksList'
-import LoadingTasksList from '../../components/Tasks/LoadingTasksList'
-import { fetchTasks, getTasksError, getFetchTasksLoading } from './tasksSlice'
-import { getUser } from '../user/userSlice'
 import AddNewTaskInput from '../../components/Tasks/AddNewTaskInput'
+import LoadingTasksList from '../../components/Tasks/LoadingTasksList'
+
+import { getUser } from '../user/userSlice'
+import { fetchTasks, getTasksError, getFetchTasksLoading } from './tasksSlice'
 
 export default function Tasks() {
   const dispatch = useDispatch()
@@ -19,21 +20,19 @@ export default function Tasks() {
     dispatch(fetchTasks(access_token))
   }, [])
 
+  if (responseError)
+    return (
+      <>
+        <h4>Your todo list</h4>
+        <Alert variant="warning">{responseError}</Alert>
+      </>
+    )
+
   return (
     <>
       <h4>Your todo list</h4>
-      {responseError ? (
-        <Alert variant="warning">{responseError}</Alert>
-      ) : (
-        <>
-          <AddNewTaskInput />
-          {fetchTasksLoading === 'pending' ? (
-            <LoadingTasksList />
-          ) : (
-            <TasksList />
-          )}
-        </>
-      )}
+      <AddNewTaskInput />
+      {fetchTasksLoading === 'pending' ? <LoadingTasksList /> : <TasksList />}
     </>
   )
 }

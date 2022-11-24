@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Row, Col } from 'react-bootstrap'
 
+import SearchFormComponent from '../Forms/Search/SearchFormComponent'
+import FilterFormComponent from '../Forms/Filter/FilterFormComponent'
+
 import {
   getNoteSearchQuery,
   getNoteSortBy,
   setNoteSearchQuery,
   setNoteSortBy,
 } from '../../features/notes/notesSlice'
-import SearchFormComponent from '../Forms/Search/SearchFormComponent'
-import FilterFormComponent from '../Forms/Filter/FilterFormComponent'
 
 export default function NotesFilterForm() {
   const dispatch = useDispatch()

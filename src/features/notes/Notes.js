@@ -11,6 +11,7 @@ import LoadingNotesList from '../../components/Notes/LoadingNotesList'
 import NotesOffCanvas from '../../components/Notes/NotesOffCanvas'
 import NotesFilterForm from '../../components/Notes/NotesFilterForm'
 import NotesFilterList from '../../components/Notes/FilterList/NotesFilterList'
+
 import { getUser } from '../user/userSlice'
 import {
   fetchNotes,
@@ -35,11 +36,9 @@ export default function Notes() {
   const handleClose = () => setShow(false)
 
   useEffect(() => {
-    ;(async () => {
-      await dispatch(fetchWorkspaces(access_token))
-      await dispatch(fetchTasks(access_token))
-      await dispatch(fetchNotes(access_token))
-    })()
+    dispatch(fetchTasks(access_token))
+    dispatch(fetchNotes(access_token))
+    dispatch(fetchWorkspaces(access_token))
 
     return () => {
       dispatch(removeNotesActiveFilterStatus())

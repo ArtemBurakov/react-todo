@@ -6,7 +6,6 @@ import Login from './features/user/Login'
 import Signup from './features/user/Signup'
 import Home from './components/Home/Home'
 import NotFound from './components/NotFound/NotFound'
-
 import RequireAuth from './components/RequireAuth'
 
 import Tasks from './features/tasks/Tasks'

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Row, Col, Form, Alert } from 'react-bootstrap'
 
 import Loader from '../Loader/Loader'
+
 import {
   getUserLoading,
   getUserLoginEvent,
@@ -13,13 +14,9 @@ export default function LoginForm({ setUsername, setPassword, onLoginClick }) {
   const userLoading = useSelector(getUserLoading)
   const userLoginEvent = useSelector(getUserLoginEvent)
 
-  const handleInputUsername = (event) => {
-    setUsername(event.target.value)
-  }
+  const handleInputUsername = (event) => setUsername(event.target.value)
 
-  const handleInputPassword = (event) => {
-    setPassword(event.target.value)
-  }
+  const handleInputPassword = (event) => setPassword(event.target.value)
 
   return (
     <Row className="justify-content-center">

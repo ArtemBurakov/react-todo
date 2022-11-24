@@ -7,6 +7,7 @@ import '../Modal.css'
 import Loader from '../../Loader/Loader'
 import TasksList from '../../Tasks/TasksList'
 import AddNewTaskInput from '../../Tasks/AddNewTaskInput'
+
 import {
   updateNote,
   getSelectedNote,

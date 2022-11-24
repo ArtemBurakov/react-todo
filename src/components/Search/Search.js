@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
 
 import './Search.css'
+
 import {
   getSearchQuery,
   setSearchQuery,

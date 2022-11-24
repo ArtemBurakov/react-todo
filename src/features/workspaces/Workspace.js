@@ -12,6 +12,7 @@ import AddNote from '../../components/Notes/AddNote'
 import NotesOffCanvas from '../../components/Notes/NotesOffCanvas'
 import LoadingWorkspace from '../../components/Workspaces/LoadingWorkspace'
 import WorkspaceModal from '../../components/Modal/Workspaces/WorkspaceModal'
+
 import {
   fetchWorkspace,
   getSelectedWorkspace,

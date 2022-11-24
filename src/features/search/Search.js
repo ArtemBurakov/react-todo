@@ -7,8 +7,8 @@ import { ListGroup, Accordion } from 'react-bootstrap'
 import TaskItem from '../../components/Tasks/TaskItem'
 import NoteItem from '../../components/Notes/NoteItem'
 import WorkspaceItem from '../../components/Workspaces/Item/WorkspaceItem'
-import { notesBreakpointColumns } from './../../components/Notes/NotesBreakepointColumns'
-import { workspacesBreakpointColumns } from './../../components/Workspaces/WorkspacesBreakepointColumns'
+import { notesBreakpointColumns } from './../../components/Notes/NotesBreakpointColumns'
+import { workspacesBreakpointColumns } from './../../components/Workspaces/WorkspacesBreakpointColumns'
 
 import { getUser } from '../user/userSlice'
 import { fetchTasks, getTasks } from '../tasks/tasksSlice'
@@ -27,24 +27,21 @@ export default function Search() {
 
   const search = (data) => {
     if (!searchQuery || !data.length) return []
-    return data?.filter((item) => {
-      return searchParam?.some((newItem) => {
-        return (
+    return data?.filter((item) =>
+      searchParam?.some(
+        (newItem) =>
           item[newItem]
             ?.toString()
             ?.toLowerCase()
             ?.indexOf(searchQuery.toLowerCase()) > -1
-        )
-      })
-    })
+      )
+    )
   }
 
   useEffect(() => {
-    ;(async () => {
-      await dispatch(fetchTasks(access_token))
-      await dispatch(fetchNotes(access_token))
-      await dispatch(fetchWorkspaces(access_token))
-    })()
+    dispatch(fetchTasks(access_token))
+    dispatch(fetchNotes(access_token))
+    dispatch(fetchWorkspaces(access_token))
 
     return () => {
       dispatch(setSearchQuery(''))

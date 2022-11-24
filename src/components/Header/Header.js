@@ -7,10 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowRightFromBracket,
   faArrowRightToBracket,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons'
 
 import './Header.css'
 import Search from '../Search/Search'
+
 import { getUser, removeUser } from '../../features/user/userSlice'
 
 export default function Header() {
@@ -48,7 +50,10 @@ export default function Header() {
                 </Button>
               </>
             ) : (
-              <NavLink to="login">Login</NavLink>
+              <>
+                <NavLink to="login">Login</NavLink>
+                <NavLink to="signup">Signup</NavLink>
+              </>
             )}
           </div>
           <button
@@ -80,7 +85,6 @@ export default function Header() {
               Workspaces
             </NavLink>
             <a
-              href=""
               className="link-with-image"
               onClick={() => {
                 hideMobileMenu()
@@ -92,14 +96,24 @@ export default function Header() {
             </a>
           </>
         ) : (
-          <NavLink
-            to="login"
-            className="link-with-image"
-            onClick={hideMobileMenu}
-          >
-            <FontAwesomeIcon icon={faArrowRightToBracket} />
-            <span>Login</span>
-          </NavLink>
+          <>
+            <NavLink
+              to="login"
+              className="link-with-image"
+              onClick={hideMobileMenu}
+            >
+              <FontAwesomeIcon icon={faArrowRightToBracket} />
+              <span>Login</span>
+            </NavLink>
+            <NavLink
+              to="signup"
+              className="link-with-image"
+              onClick={hideMobileMenu}
+            >
+              <FontAwesomeIcon icon={faUserPlus} />
+              <span>Signup</span>
+            </NavLink>
+          </>
         )}
       </div>
     </header>

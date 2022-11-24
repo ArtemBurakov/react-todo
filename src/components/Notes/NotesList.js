@@ -5,6 +5,8 @@ import Masonry from 'react-masonry-css'
 
 import NoteItem from './NoteItem'
 import Pagination from '../Pagination/Pagination'
+import { notesBreakpointColumns } from './NotesBreakpointColumns'
+
 import {
   getNotes,
   getNoteSearchQuery,
@@ -13,7 +15,6 @@ import {
   getNotesActiveFilterStatus,
 } from '../../features/notes/notesSlice'
 import { getSelectedWorkspace } from '../../features/workspaces/workspacesSlice'
-import { notesBreakpointColumns } from './NotesBreakepointColumns'
 
 const NOTES_PER_PAGE = 15
 

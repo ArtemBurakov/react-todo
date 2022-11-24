@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Stack, ListGroup, Placeholder } from 'react-bootstrap'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faCheck } from '@fortawesome/free-solid-svg-icons'
 

@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 import { Accordion } from 'react-bootstrap'
 
+import FilterListItem from './FilterListItem'
+
 import {
   getSelectedWorkspace,
   getWorkspaces,
@@ -16,7 +18,6 @@ import {
   setNotesActiveFilterListItem,
   setNotesActiveFilterStatus,
 } from '../../../features/notes/notesSlice'
-import FilterListItem from './FilterListItem'
 
 export default function NotesFilterList({ onListItemSelect, flush = false }) {
   const dispatch = useDispatch()

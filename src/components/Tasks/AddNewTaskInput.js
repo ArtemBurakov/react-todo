@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Form, InputGroup } from 'react-bootstrap'
 
 import Loader from '../Loader/Loader'
+
 import { getUser } from '../../features/user/userSlice'
 import { getSelectedNote, updateNote } from '../../features/notes/notesSlice'
 import { addTask, getAddTaskLoading } from '../../features/tasks/tasksSlice'

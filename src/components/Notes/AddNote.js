@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Form, Modal, Button } from 'react-bootstrap'
 
 import Loader from '../Loader/Loader'
+
 import { getUser } from '../../features/user/userSlice'
 import { addNote, getAddNoteLoading } from '../../features/notes/notesSlice'
 import { getSelectedWorkspace } from '../../features/workspaces/workspacesSlice'

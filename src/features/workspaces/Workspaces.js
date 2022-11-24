@@ -3,15 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { Alert } from 'react-bootstrap'
 
-import LoadingWorkspacesList from '../../components/Workspaces/LoadingWorkspacesList'
 import WorkspacesList from '../../components/Workspaces/WorkspacesList'
+import WorkspacesFilterForm from '../../components/Workspaces/WorkspacesFilterForm'
+import LoadingWorkspacesList from '../../components/Workspaces/LoadingWorkspacesList'
+
 import {
   fetchWorkspaces,
   getWorkspacesError,
   getFetchWorkspacesLoading,
 } from './workspacesSlice'
 import { getUser } from '../user/userSlice'
-import WorkspacesFilterForm from '../../components/Workspaces/WorkspacesFilterForm'
 
 export default function Workspaces() {
   const dispatch = useDispatch()

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { authorizeUser, getUserLoading } from './userSlice'
 
 import LoginForm from '../../components/Login/LoginForm'
+
+import { authorizeUser, getUser, getUserLoading } from './userSlice'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -11,12 +12,14 @@ export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const userLoading = useSelector(getUserLoading)
+  const user = useSelector(getUser)
 
-  const onLoginClick = async () => {
-    if (userLoading === 'idle') {
-      await dispatch(authorizeUser({ username, password }))
-      navigate('/', { replace: true })
-    }
+  useEffect(() => {
+    if (userLoading === 'idle' && user) navigate('/', { replace: true })
+  }, [userLoading, user])
+
+  const onLoginClick = () => {
+    if (userLoading === 'idle') dispatch(authorizeUser({ username, password }))
   }
 
   return (
