@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-const URL = 'http://192.168.88.26/php-yii2-todo/backend/web/v1/'
-
 export default axios.create({
-  baseURL: URL,
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     'Content-Type': 'application/json',
     Pragma: 'no-cache',
