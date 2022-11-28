@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import LoginForm from '../../components/Login/LoginForm'
+import LoginForm from '../../components/Forms/LoginForm'
 
 import { authorizeUser, getUser, getUserLoading } from './userSlice'
 

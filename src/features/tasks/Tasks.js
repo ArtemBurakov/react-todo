@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { Alert } from 'react-bootstrap'
 
-import TasksList from '../../components/Tasks/TasksList'
+import TasksList from '../../components/Tasks/List/TasksList'
 import AddNewTaskInput from '../../components/Tasks/AddNewTaskInput'
-import LoadingTasksList from '../../components/Tasks/LoadingTasksList'
+import LoadingTasksList from '../../components/Tasks/List/LoadingTasksList'
 
 import { getUser } from '../user/userSlice'
 import { fetchTasks, getTasksError, getFetchTasksLoading } from './tasksSlice'

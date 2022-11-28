@@ -21,7 +21,7 @@ export default function WorkspaceModal({ show, handleClose }) {
   const updateWorkspaceLoading = useSelector(getUpdateWorkspaceLoading)
 
   const [name, setName] = useState(selectedWorkspace.name)
-  const [status, setStatus] = useState(selectedWorkspace.status)
+  const [status] = useState(selectedWorkspace.status)
 
   const handleInputName = (event) => setName(event.target.value)
 

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import Masonry from 'react-masonry-css'
 
 import NoteItem from './NoteItem'
-import Pagination from '../Pagination/Pagination'
+import Pagination from '../../Pagination/Pagination'
 import { notesBreakpointColumns } from './NotesBreakpointColumns'
 
 import {
@@ -13,10 +13,11 @@ import {
   getNoteSortBy,
   getNoteSearchParam,
   getNotesActiveFilterStatus,
-} from '../../features/notes/notesSlice'
-import { getSelectedWorkspace } from '../../features/workspaces/workspacesSlice'
+} from '../../../features/notes/notesSlice'
+import { getSelectedWorkspace } from '../../../features/workspaces/workspacesSlice'
 
 const NOTES_PER_PAGE = 15
+const ALL_NOTES_STATUS = 30
 
 export default function NotesList() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -28,7 +29,7 @@ export default function NotesList() {
   const selectedWorkspace = useSelector(getSelectedWorkspace)
 
   const prepareData = useMemo(() => {
-    if (noteStatus === 30)
+    if (noteStatus === ALL_NOTES_STATUS)
       return selectedWorkspace
         ? notes.filter((note) => note.board_id === selectedWorkspace?.id)
         : [...notes]

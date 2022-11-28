@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 
 import Masonry from 'react-masonry-css'
 
-import AddWorkspace from './AddWorkspace'
-import WorkspaceItem from './Item/WorkspaceItem'
-import Pagination from '../Pagination/Pagination'
-import AddNewWorkspaceItem from './Item/AddNewWorkspaceItem'
+import AddWorkspace from '../AddWorkspace'
+import WorkspaceItem from '../Item/WorkspaceItem'
+import Pagination from '../../Pagination/Pagination'
+import AddNewWorkspaceItem from '../Item/AddNewWorkspaceItem'
 import { workspacesBreakpointColumns } from './WorkspacesBreakpointColumns'
 
 import {
@@ -14,7 +14,7 @@ import {
   getWorkspaceSearchParam,
   getWorkspaceSearchQuery,
   getWorkspaceSortBy,
-} from '../../features/workspaces/workspacesSlice'
+} from '../../../features/workspaces/workspacesSlice'
 
 const WORKSPACES_PER_PAGE = 17
 

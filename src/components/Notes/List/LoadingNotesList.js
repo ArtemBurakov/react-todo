@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Row, Col, Card, Placeholder } from 'react-bootstrap'
 
-export default function LoadingTasksList() {
+export default function LoadingNotesList() {
   const numberOfNotes = 14
 
   return (

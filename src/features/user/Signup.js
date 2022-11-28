@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import SignupForm from '../../components/Signup/SignupForm'
+import SignupForm from '../../components/Forms/SignupForm'
 
 import { getUserLoading, signupUser } from './userSlice'
 

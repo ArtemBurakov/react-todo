@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { Alert } from 'react-bootstrap'
 
-import WorkspacesList from '../../components/Workspaces/WorkspacesList'
+import WorkspacesList from '../../components/Workspaces/List/WorkspacesList'
 import WorkspacesFilterForm from '../../components/Workspaces/WorkspacesFilterForm'
-import LoadingWorkspacesList from '../../components/Workspaces/LoadingWorkspacesList'
+import LoadingWorkspacesList from '../../components/Workspaces/List/LoadingWorkspacesList'
 
 import {
   fetchWorkspaces,

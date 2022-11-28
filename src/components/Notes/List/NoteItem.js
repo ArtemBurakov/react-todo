@@ -4,10 +4,10 @@ import Moment from 'react-moment'
 
 import { Col, Card } from 'react-bootstrap'
 
-import TasksList from '../Tasks/TasksList'
-import NoteModal from '../Modal/Notes/NoteModal'
+import TasksList from '../../Tasks/List/TasksList'
+import NoteModal from '../../Modal/Notes/NoteModal'
 
-import { setSelectedNote } from '../../features/notes/notesSlice'
+import { setSelectedNote } from '../../../features/notes/notesSlice'
 
 const MAX_TASKS_IN_NOTE_VIEW = 5
 

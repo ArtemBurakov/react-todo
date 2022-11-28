@@ -13,8 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   updateTask,
   getUpdateTaskLoading,
-} from '../../features/tasks/tasksSlice'
-import { getUser } from '../../features/user/userSlice'
+} from '../../../features/tasks/tasksSlice'
+import { getUser } from '../../../features/user/userSlice'
 
 const STATUS_ACTIVE = 10
 const STATUS_DONE = 20

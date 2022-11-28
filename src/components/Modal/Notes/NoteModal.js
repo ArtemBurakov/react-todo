@@ -5,7 +5,7 @@ import { Form, Modal, Button, ButtonGroup, ToggleButton } from 'react-bootstrap'
 
 import '../Modal.css'
 import Loader from '../../Loader/Loader'
-import TasksList from '../../Tasks/TasksList'
+import TasksList from '../../Tasks/List/TasksList'
 import AddNewTaskInput from '../../Tasks/AddNewTaskInput'
 
 import {
