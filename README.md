@@ -15,30 +15,30 @@ React-todo is react app created as frontend part for todo project. Written using
 
 ## Screenshots
 - Home, Login, Signup pages
-![image](https://user-images.githubusercontent.com/59533626/204166726-81d7295c-3809-44db-a9ed-09ba4ee8909f.png)
-![image](https://user-images.githubusercontent.com/59533626/204166736-2142cff2-7b62-414c-8e60-162f21054dae.png)
-![image](https://user-images.githubusercontent.com/59533626/204166741-585c69c6-3d39-4a61-bc7f-1d387542a5d0.png)
+![image](https://user-images.githubusercontent.com/59533626/210185592-7ed37e50-8304-4d93-892e-4b5273c08329.png)
+![image](https://user-images.githubusercontent.com/59533626/210185417-9c8481e3-bc06-4b13-9b1f-240bedcb84c1.png)
+![image](https://user-images.githubusercontent.com/59533626/210185421-c5303661-be67-46dd-bb3b-79eabbdc5318.png)
 
 - Tasks
-![image](https://user-images.githubusercontent.com/59533626/204166546-976b249d-ddff-4fab-b690-0ed68a0218ea.png)
+![image](https://user-images.githubusercontent.com/59533626/210185323-6b8d9791-46a6-45a2-bba4-e309681230d9.png)
 
 - Notes
-![image](https://user-images.githubusercontent.com/59533626/204166552-c9cd8de4-60fa-4b69-9e40-085c84616837.png)
-![image](https://user-images.githubusercontent.com/59533626/204166562-03267289-1ab6-4ed1-a4b1-034d53e3a978.png)
+![image](https://user-images.githubusercontent.com/59533626/210185478-25ce3c0c-c3d8-4367-9b85-8645ce6fdd81.png)
+![image](https://user-images.githubusercontent.com/59533626/210185488-abc29bd6-5cbd-487f-84ff-fd45e257c2ef.png)
 
 - Workspaces
-![image](https://user-images.githubusercontent.com/59533626/204166695-0e2152b4-f290-4cfb-b7ed-74a5c147bcd1.png)
-![image](https://user-images.githubusercontent.com/59533626/204166595-1a6721f6-6ab3-4aa4-9b2c-93703367c0e6.png)
+![image](https://user-images.githubusercontent.com/59533626/210185371-fe862284-f4c2-489a-9d1e-3fc556438b59.png)
+![image](https://user-images.githubusercontent.com/59533626/210185494-c733ac59-9709-4479-942b-c1c74fc0481e.png)
 
 - Search
-![image](https://user-images.githubusercontent.com/59533626/204166519-cd2aed36-95d7-46a7-ab28-7681eb510838.png)
+![image](https://user-images.githubusercontent.com/59533626/210185530-1fe0546c-dcab-4614-ad1a-c43024794e4f.png)
 
 - Fully adaptive app design
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/59533626/204166881-74a7e2fd-aaec-4404-ab44-22579324ce09.png" height="600" width="350">
-  <img src="https://user-images.githubusercontent.com/59533626/204166901-bfccbe4e-d735-45db-9ea7-300e790c51d6.png" height="600" width="350">
-  <img src="https://user-images.githubusercontent.com/59533626/204166956-798f82a6-2d1d-4c6b-92f1-a9fa1a1cf69a.png" height="600" width="350">
-  <img src="https://user-images.githubusercontent.com/59533626/204166976-225f79b4-073e-41ce-807b-5ab94b02dc48.png" height="600" width="350">
+  <img src="https://user-images.githubusercontent.com/59533626/210185699-811c158a-677d-4cf2-9a65-2aabbe401225.png" height="600" width="350">
+  <img src="https://user-images.githubusercontent.com/59533626/210185711-beb2e8e3-c6a7-43c7-9750-4d5ce795573b.png" height="600" width="350">
+  <img src="https://user-images.githubusercontent.com/59533626/210185727-7169c519-eb9f-4115-a218-ebc3a9eb1000.png" height="600" width="350">
+  <img src="https://user-images.githubusercontent.com/59533626/210185738-c1517e28-752a-4a52-8806-6616a681e229.png" height="600" width="350">
 </p>
 
 ## Requirements
