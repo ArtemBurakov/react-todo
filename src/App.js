@@ -24,7 +24,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="tasks" element={<Tasks />} />
           <Route path="notes" element={<Notes />} />
-          <Route path="workspaces" element={<RequireAuth />}>
+          <Route path="workspaces">
             <Route index element={<Workspaces />} />
             <Route path=":workspaceId" element={<Workspace />} />
           </Route>

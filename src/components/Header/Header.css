@@ -1,6 +1,6 @@
 nav {
   position: relative;
-  z-index: 99;
+  z-index: 5;
   padding: 1rem 1.5rem;
   background-color: var(--light);
 }
@@ -55,7 +55,7 @@ nav {
   display: block;
   position: relative;
   margin-top: 5px;
-  z-index: 1;
+  z-index: 2;
   user-select: none;
   appearance: none;
   outline: none;
@@ -72,7 +72,7 @@ nav {
   margin-bottom: 5px;
   background-color: var(--dark);
   border-radius: 6px;
-  z-index: 1;
+  z-index: 2;
   transform-origin: 0 0;
   transition: 0.4s;
 }
@@ -105,7 +105,7 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 98;
+  z-index: 3;
   padding-top: 5rem;
   opacity: 0;
   transform: translateY(-100%);

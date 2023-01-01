@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  background: #ebedf0;
+  background: var(--light-grey);
   transition: background-color 0.15s;
   font-weight: 500;
 }

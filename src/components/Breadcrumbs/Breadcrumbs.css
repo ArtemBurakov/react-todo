@@ -1,0 +1,37 @@
+.breadcrumbs {
+  position: relative;
+  padding: 0px;
+  z-index: 2;
+}
+
+.breadcrumb-item a {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--dark);
+  transition: 0.3s;
+}
+
+.breadcrumb-item a:hover .home-icon {
+  color: var(--primary);
+  transition: 0.3s;
+}
+
+.breadcrumb-item a:hover {
+  background-color: var(--light-grey);
+  border-radius: 16px;
+}
+
+.breadcrumb-item.active a {
+  color: var(--primary);
+  background-color: var(--light-grey);
+  border-radius: 16px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: var(--bs-breadcrumb-divider, '>') !important;
+}

@@ -4,8 +4,9 @@
 
 .search-input-form .search-input {
   margin-right: 6px;
-  background: #ebedf0;
+  background: var(--light-grey);
   border: 2px solid transparent;
+  transition: 0.3s;
 }
 
 .search-input-form .search-input:focus,
