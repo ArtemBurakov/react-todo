@@ -19,7 +19,7 @@ import { getSelectedWorkspace } from '../../../features/workspaces/workspacesSli
 const NOTES_PER_PAGE = 15
 const ALL_NOTES_STATUS = 30
 
-export default function NotesList() {
+export default function NotesList({ maxNotes = null }) {
   const [currentPage, setCurrentPage] = useState(1)
   const notes = useSelector(getNotes)
   const noteStatus = useSelector(getNotesActiveFilterStatus)
@@ -60,7 +60,9 @@ export default function NotesList() {
 
     return {
       length: data.length,
-      data: data.slice(firstPageIndex, lastPageIndex),
+      data: maxNotes
+        ? data.slice(0, maxNotes)
+        : data.slice(firstPageIndex, lastPageIndex),
     }
   }, [prepareData, currentPage, sortBy, searchParam, searchQuery])
 

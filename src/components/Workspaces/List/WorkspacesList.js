@@ -18,7 +18,10 @@ import {
 
 const WORKSPACES_PER_PAGE = 17
 
-export default function WorkspacesList() {
+export default function WorkspacesList({
+  showCreateWorkspaceButton = true,
+  maxWorkspaces = null,
+}) {
   const workspaces = useSelector(getWorkspaces)
   const [currentPage, setCurrentPage] = useState(1)
   const [show, setShow] = useState(false)
@@ -52,7 +55,9 @@ export default function WorkspacesList() {
 
     return {
       length: data.length,
-      data: data.slice(firstPageIndex, lastPageIndex),
+      data: maxWorkspaces
+        ? data.slice(0, maxWorkspaces)
+        : data.slice(firstPageIndex, lastPageIndex),
     }
   }, [currentPage, workspaces, sortBy, searchParam, searchQuery])
 
@@ -63,7 +68,9 @@ export default function WorkspacesList() {
         className="masonry-grid"
         columnClassName="masonry-grid_column"
       >
-        <AddNewWorkspaceItem handleShow={handleShow} />
+        {showCreateWorkspaceButton && (
+          <AddNewWorkspaceItem handleShow={handleShow} />
+        )}
         {filteredData?.data?.map((workspace) => (
           <WorkspaceItem workspace={workspace} key={workspace.id} />
         ))}

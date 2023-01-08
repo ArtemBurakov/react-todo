@@ -1,0 +1,12 @@
+.link-title {
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--dark);
+  transition: 0.3s;
+}
+
+.link-title:hover {
+  color: var(--primary);
+  cursor: pointer;
+}
