@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-todo/static/css/main.2e9baecb.css",
-    "main.js": "/react-todo/static/js/main.673fbada.js",
+    "main.css": "/react-todo/static/css/main.3cadf7f1.css",
+    "main.js": "/react-todo/static/js/main.21c357c5.js",
     "static/media/workspaces.svg": "/react-todo/static/media/workspaces.2a0f89962869e16c3a921f7f1e16bb46.svg",
     "static/media/notes.svg": "/react-todo/static/media/notes.0c85ad2246890310e4ab9bf0813c32ee.svg",
     "static/media/tasks.svg": "/react-todo/static/media/tasks.2a349234e805ce1e08d6b5aca34db3c6.svg",
     "index.html": "/react-todo/index.html",
-    "main.2e9baecb.css.map": "/react-todo/static/css/main.2e9baecb.css.map",
-    "main.673fbada.js.map": "/react-todo/static/js/main.673fbada.js.map"
+    "main.3cadf7f1.css.map": "/react-todo/static/css/main.3cadf7f1.css.map",
+    "main.21c357c5.js.map": "/react-todo/static/js/main.21c357c5.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e9baecb.css",
-    "static/js/main.673fbada.js"
+    "static/css/main.3cadf7f1.css",
+    "static/js/main.21c357c5.js"
   ]
 }
