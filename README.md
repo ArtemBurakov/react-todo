@@ -16,6 +16,7 @@ React-todo is react app created as frontend part for todo project. Written using
 ## Screenshots
 - Home, Login, Signup pages
 ![image](https://user-images.githubusercontent.com/59533626/210185592-7ed37e50-8304-4d93-892e-4b5273c08329.png)
+![image](https://user-images.githubusercontent.com/59533626/211196634-53d55b7a-352a-45c9-9fb5-2f613eb08a97.png)
 ![image](https://user-images.githubusercontent.com/59533626/210185417-9c8481e3-bc06-4b13-9b1f-240bedcb84c1.png)
 ![image](https://user-images.githubusercontent.com/59533626/210185421-c5303661-be67-46dd-bb3b-79eabbdc5318.png)
 
