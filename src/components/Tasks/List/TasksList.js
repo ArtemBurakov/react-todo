@@ -40,15 +40,17 @@ export default function TasksList({ note, type, maxTasks = null }) {
           <TaskItem key={task.id} task={task} type={type} />
         ))}
       </ListGroup>
-      <Pagination
-        currentPage={currentPage}
-        totalCount={filteredData.length}
-        pageSize={TASKS_PER_PAGE}
-        onPageChange={(page) => {
-          window.scrollTo(0, 0)
-          setCurrentPage(page)
-        }}
-      />
+      {!maxTasks && (
+        <Pagination
+          currentPage={currentPage}
+          totalCount={filteredData.length}
+          pageSize={TASKS_PER_PAGE}
+          onPageChange={(page) => {
+            window.scrollTo(0, 0)
+            setCurrentPage(page)
+          }}
+        />
+      )}
     </>
   )
 }

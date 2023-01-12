@@ -19,6 +19,8 @@ import {
   setNotesActiveFilterStatus,
 } from '../../../features/notes/notesSlice'
 
+const MAX_WORKSPACES_IN_FILTER_LIST = 10
+
 export default function NotesFilterList({ onListItemSelect, flush = false }) {
   const dispatch = useDispatch()
   const location = useLocation()
@@ -35,7 +37,8 @@ export default function NotesFilterList({ onListItemSelect, flush = false }) {
           ? null
           : workspaces
               .filter(({ status }) => status === 10)
-              .sort((a, b) => b.updated_at - a.updated_at),
+              .sort((a, b) => b.updated_at - a.updated_at)
+              .slice(0, MAX_WORKSPACES_IN_FILTER_LIST),
     }),
     [notesFilterList, selectedWorkspace, workspaces]
   )
@@ -68,6 +71,11 @@ export default function NotesFilterList({ onListItemSelect, flush = false }) {
           onSelect={selectHandler}
           activeFilter={notesActiveFilterListItem}
           eventKey="1"
+          enableShowMoreLink={
+            filterList.workspaces.length === MAX_WORKSPACES_IN_FILTER_LIST
+              ? true
+              : false
+          }
         />
       </Accordion>
     </div>

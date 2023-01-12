@@ -43,7 +43,10 @@ export const fetchNotes = createAsyncThunk(
 
 export const addNote = createAsyncThunk(
   'notes/addNote',
-  async ({ id, access_token, board_id = null, name, text }, thunkAPI) => {
+  async (
+    { id, access_token, board_id = null, name, text, type = 0 },
+    thunkAPI
+  ) => {
     try {
       const { data } = await Api.post(
         `notes`,
@@ -52,6 +55,7 @@ export const addNote = createAsyncThunk(
           board_id: board_id,
           name: name,
           text: text,
+          type: type,
           status: 10,
         },
         {
@@ -164,6 +168,8 @@ export const notesSlice = createSlice({
             .map((note) => note.id)
             .indexOf(action.payload.id)
           state.notes.splice(updatedNoteIndex, 1, action.payload)
+
+          if (state.selectedNote) state.selectedNote = action.payload
         }
       })
       .addCase(updateNote.rejected, (state, action) => {

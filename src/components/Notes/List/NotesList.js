@@ -28,7 +28,7 @@ export default function NotesList({ maxNotes = null }) {
   const searchParam = useSelector(getNoteSearchParam)
   const selectedWorkspace = useSelector(getSelectedWorkspace)
 
-  const prepareData = useMemo(() => {
+  const preparedData = useMemo(() => {
     if (noteStatus === ALL_NOTES_STATUS)
       return selectedWorkspace
         ? notes.filter((note) => note.board_id === selectedWorkspace?.id)
@@ -43,7 +43,7 @@ export default function NotesList({ maxNotes = null }) {
     const firstPageIndex = (currentPage - 1) * NOTES_PER_PAGE
     const lastPageIndex = firstPageIndex + NOTES_PER_PAGE
 
-    const data = prepareData.filter((item) =>
+    const data = preparedData.filter((item) =>
       searchParam?.some(
         (newItem) =>
           item[newItem]
@@ -64,7 +64,7 @@ export default function NotesList({ maxNotes = null }) {
         ? data.slice(0, maxNotes)
         : data.slice(firstPageIndex, lastPageIndex),
     }
-  }, [prepareData, currentPage, sortBy, searchParam, searchQuery])
+  }, [preparedData, currentPage, sortBy, searchParam, searchQuery])
 
   return (
     <>
@@ -77,15 +77,17 @@ export default function NotesList({ maxNotes = null }) {
           <NoteItem note={note} key={note.id} />
         ))}
       </Masonry>
-      <Pagination
-        currentPage={currentPage}
-        totalCount={filteredData.length}
-        pageSize={NOTES_PER_PAGE}
-        onPageChange={(page) => {
-          window.scrollTo(0, 0)
-          setCurrentPage(page)
-        }}
-      />
+      {!maxNotes && (
+        <Pagination
+          currentPage={currentPage}
+          totalCount={filteredData.length}
+          pageSize={NOTES_PER_PAGE}
+          onPageChange={(page) => {
+            window.scrollTo(0, 0)
+            setCurrentPage(page)
+          }}
+        />
+      )}
     </>
   )
 }

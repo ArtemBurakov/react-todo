@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import classNames from 'classnames'
 import { ListGroup, Accordion } from 'react-bootstrap'
+
+const SHOW_MORE_WORKSPACES_LINK_TEXT = 'View all workspaces'
 
 export default function FilterListItem({
   title,
@@ -9,7 +12,10 @@ export default function FilterListItem({
   onSelect,
   activeFilter,
   eventKey,
+  enableShowMoreLink = false,
 }) {
+  const navigate = useNavigate()
+
   if (!data) return
 
   return (
@@ -30,6 +36,16 @@ export default function FilterListItem({
                 {item.name}
               </ListGroup.Item>
             ))}
+            {enableShowMoreLink && (
+              <ListGroup.Item
+                action
+                key={SHOW_MORE_WORKSPACES_LINK_TEXT}
+                onClick={() => navigate('/workspaces')}
+                className="border-0 rounded text-truncate"
+              >
+                {SHOW_MORE_WORKSPACES_LINK_TEXT}
+              </ListGroup.Item>
+            )}
           </ListGroup>
         </ListGroup.Item>
       </Accordion.Body>

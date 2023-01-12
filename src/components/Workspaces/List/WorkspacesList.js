@@ -75,15 +75,17 @@ export default function WorkspacesList({
           <WorkspaceItem workspace={workspace} key={workspace.id} />
         ))}
       </Masonry>
-      <Pagination
-        currentPage={currentPage}
-        totalCount={filteredData.length}
-        pageSize={WORKSPACES_PER_PAGE}
-        onPageChange={(page) => {
-          window.scrollTo(0, 0)
-          setCurrentPage(page)
-        }}
-      />
+      {!maxWorkspaces && (
+        <Pagination
+          currentPage={currentPage}
+          totalCount={filteredData.length}
+          pageSize={WORKSPACES_PER_PAGE}
+          onPageChange={(page) => {
+            window.scrollTo(0, 0)
+            setCurrentPage(page)
+          }}
+        />
+      )}
       {show && <AddWorkspace show={show} handleClose={handleClose} />}
     </>
   )
