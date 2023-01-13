@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Api, { handleResponseError } from '../../app/axiosClient'
+import { STATUS_ACTIVE } from '../../app/constants'
 
 const initialState = {
   tasks: [],
@@ -35,7 +36,7 @@ export const addTask = createAsyncThunk(
           user_id: id,
           note_id: noteId,
           name: name,
-          status: 10,
+          status: STATUS_ACTIVE,
         },
         {
           headers: { Authorization: 'Bearer ' + access_token },

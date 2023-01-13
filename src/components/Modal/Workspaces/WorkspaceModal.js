@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Form, Modal, Button } from 'react-bootstrap'
 
 import Loader from '../../Loader/Loader'
+import { STATUS_DELETED } from '../../../app/constants'
 
 import {
   updateWorkspace,
@@ -11,8 +12,6 @@ import {
   getSelectedWorkspace,
 } from '../../../features/workspaces/workspacesSlice'
 import { getUser } from '../../../features/user/userSlice'
-
-const DELETED_WORKSPACE_STATUS = 0
 
 export default function WorkspaceModal({ show, handleClose }) {
   const dispatch = useDispatch()
@@ -48,7 +47,7 @@ export default function WorkspaceModal({ show, handleClose }) {
             <Button
               variant="danger"
               onClick={() => {
-                onSaveChangesClick(DELETED_WORKSPACE_STATUS)
+                onSaveChangesClick(STATUS_DELETED)
               }}
             >
               Delete

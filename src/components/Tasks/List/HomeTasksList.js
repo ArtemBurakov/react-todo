@@ -6,6 +6,7 @@ import { Row, ListGroup } from 'react-bootstrap'
 
 import TaskItem from './TaskItem'
 import LoadingTasksList from './LoadingTasksList'
+import { STATUS_DELETED } from '../../../app/constants'
 
 import {
   getFetchTasksLoading,
@@ -18,7 +19,7 @@ export default function HomeTasksList({ maxTasks }) {
 
   const filteredData = useMemo(() => {
     const data = tasks
-      .filter((task) => task.status !== 0)
+      .filter((task) => task.status !== STATUS_DELETED)
       .sort((a, b) => b.updated_at - a.updated_at)
       .sort((a, b) => a.status - b.status)
 

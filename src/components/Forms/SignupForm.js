@@ -22,11 +22,9 @@ export default function SignupForm({
   const handleInputUsername = (event) => {
     setUsername(event.target.value)
   }
-
   const handleInputEmail = (event) => {
     setEmail(event.target.value)
   }
-
   const handleInputPassword = (event) => {
     setPassword(event.target.value)
   }

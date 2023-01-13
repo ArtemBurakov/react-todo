@@ -4,12 +4,14 @@ import Moment from 'react-moment'
 
 import { Col, Card } from 'react-bootstrap'
 
+import {
+  NOTE_TYPE_WITH_TASKS,
+  MAX_TASKS_IN_NOTE_VIEW,
+} from '../../../app/constants'
 import TasksList from '../../Tasks/List/TasksList'
 import NoteModal from '../../Modal/Notes/NoteModal'
 
 import { setSelectedNote } from '../../../features/notes/notesSlice'
-
-const MAX_TASKS_IN_NOTE_VIEW = 5
 
 export default function NoteItem({ note }) {
   const dispatch = useDispatch()
@@ -32,7 +34,7 @@ export default function NoteItem({ note }) {
             <Card.Title>{note.name}</Card.Title>
             <Card.Text>{note.text}</Card.Text>
           </Card.Body>
-          {note.type === 1 && (
+          {note.type === NOTE_TYPE_WITH_TASKS && (
             <TasksList
               note={note}
               type={'inNote'}

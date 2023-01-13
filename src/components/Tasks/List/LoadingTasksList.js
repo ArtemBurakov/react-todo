@@ -5,7 +5,11 @@ import { Stack, ListGroup, Placeholder } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faCheck } from '@fortawesome/free-solid-svg-icons'
 
-export default function LoadingTasksList({ numberOfTasks = 16 }) {
+import { DEFAULT_MAX_TASKS_IN_LOADING } from '../../../app/constants'
+
+export default function LoadingTasksList({
+  numberOfTasks = DEFAULT_MAX_TASKS_IN_LOADING,
+}) {
   return (
     <ListGroup className="list-group-flush">
       {[...Array(numberOfTasks)].map((e, i) => (

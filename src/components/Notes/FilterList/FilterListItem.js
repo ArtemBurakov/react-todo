@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { ListGroup, Accordion } from 'react-bootstrap'
 
-const SHOW_MORE_WORKSPACES_LINK_TEXT = 'View all workspaces'
+import { SHOW_MORE_WORKSPACES_LINK_TEXT } from '../../../app/constants'
 
 export default function FilterListItem({
   title,

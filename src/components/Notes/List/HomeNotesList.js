@@ -7,6 +7,7 @@ import Masonry from 'react-masonry-css'
 
 import NoteItem from './NoteItem'
 import LoadingNotesList from './LoadingNotesList'
+import { STATUS_DELETED } from '../../../app/constants'
 import { notesBreakpointColumns } from './NotesBreakpointColumns'
 
 import {
@@ -22,7 +23,7 @@ export default function HomeNotesList({ maxNotes }) {
 
   const filteredData = useMemo(() => {
     const data = notes
-      .filter((note) => note.status !== 0)
+      .filter((note) => note.status !== STATUS_DELETED)
       .sort((a, b) => b.updated_at - a.updated_at)
       .sort((a, b) => a.status - b.status)
 

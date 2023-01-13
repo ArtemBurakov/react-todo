@@ -1,4 +1,8 @@
 import axios from 'axios'
+import {
+  RESPONSE_NETWORK_ERROR,
+  RESPONSE_NETWORK_INVALID_CREDENTIALS,
+} from './constants'
 
 export default axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -12,10 +16,10 @@ export default axios.create({
 export const handleResponseError = ({ response }) => {
   if (response.status === 401) {
     if (localStorage.getItem('user')) localStorage.removeItem('user')
-    return 'You are requesting with an invalid credential! Check your username or password.'
+    return RESPONSE_NETWORK_INVALID_CREDENTIALS
   }
 
-  return 'Oops, something went wrong! Check your internet connection or try again later.'
+  return RESPONSE_NETWORK_ERROR
 }
 
 export const handleSignupResponseError = ({ response }) => {
@@ -32,8 +36,7 @@ export const handleSignupResponseError = ({ response }) => {
       }
     })
   } else {
-    responseError.errorMessage =
-      'Oops, something went wrong! Check your internet connection or try again later.'
+    responseError.errorMessage = RESPONSE_NETWORK_ERROR
   }
 
   return responseError

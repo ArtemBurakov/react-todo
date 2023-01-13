@@ -3,6 +3,14 @@ import { useSelector } from 'react-redux'
 
 import Masonry from 'react-masonry-css'
 
+import {
+  ALL_NOTES_STATUS,
+  NOTES_PER_PAGE,
+  SORT_BY_A_TO_Z,
+  SORT_BY_OLDEST,
+  SORT_BY_RECENT,
+  SORT_BY_Z_TO_A,
+} from '../../../app/constants'
 import NoteItem from './NoteItem'
 import Pagination from '../../Pagination/Pagination'
 import { notesBreakpointColumns } from './NotesBreakpointColumns'
@@ -15,9 +23,6 @@ import {
   getNotesActiveFilterStatus,
 } from '../../../features/notes/notesSlice'
 import { getSelectedWorkspace } from '../../../features/workspaces/workspacesSlice'
-
-const NOTES_PER_PAGE = 15
-const ALL_NOTES_STATUS = 30
 
 export default function NotesList({ maxNotes = null }) {
   const [currentPage, setCurrentPage] = useState(1)
@@ -53,10 +58,12 @@ export default function NotesList({ maxNotes = null }) {
       )
     )
 
-    if (sortBy === 'recent') data.sort((a, b) => b.updated_at - a.updated_at)
-    if (sortBy === 'oldest') data.sort((a, b) => a.updated_at - b.updated_at)
-    if (sortBy === 'aToZ') data.sort()
-    if (sortBy === 'zToA') data.sort().reverse()
+    if (sortBy === SORT_BY_RECENT)
+      data.sort((a, b) => b.updated_at - a.updated_at)
+    if (sortBy === SORT_BY_OLDEST)
+      data.sort((a, b) => a.updated_at - b.updated_at)
+    if (sortBy === SORT_BY_A_TO_Z) data.sort()
+    if (sortBy === SORT_BY_Z_TO_A) data.sort().reverse()
 
     return {
       length: data.length,

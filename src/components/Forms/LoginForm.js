@@ -15,7 +15,6 @@ export default function LoginForm({ setUsername, setPassword, onLoginClick }) {
   const userLoginEvent = useSelector(getUserLoginEvent)
 
   const handleInputUsername = (event) => setUsername(event.target.value)
-
   const handleInputPassword = (event) => setPassword(event.target.value)
 
   return (

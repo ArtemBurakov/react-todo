@@ -6,6 +6,7 @@ import { Row } from 'react-bootstrap'
 import Masonry from 'react-masonry-css'
 
 import WorkspaceItem from '../Item/WorkspaceItem'
+import { STATUS_DELETED } from '../../../app/constants'
 import LoadingWorkspacesList from './LoadingWorkspacesList'
 import { workspacesBreakpointColumns } from './WorkspacesBreakpointColumns'
 
@@ -20,7 +21,7 @@ export default function HomeWorkspacesList({ maxWorkspaces }) {
 
   const filteredData = useMemo(() => {
     const data = workspaces
-      .filter((workspace) => workspace.status !== 0)
+      .filter((workspace) => workspace.status !== STATUS_DELETED)
       .sort((a, b) => b.updated_at - a.updated_at)
 
     return data.slice(0, maxWorkspaces)

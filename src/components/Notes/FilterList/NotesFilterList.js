@@ -5,6 +5,10 @@ import { useLocation } from 'react-router-dom'
 import { Accordion } from 'react-bootstrap'
 
 import FilterListItem from './FilterListItem'
+import {
+  MAX_WORKSPACES_IN_FILTER_LIST,
+  STATUS_ACTIVE,
+} from '../../../app/constants'
 
 import {
   getSelectedWorkspace,
@@ -18,8 +22,6 @@ import {
   setNotesActiveFilterListItem,
   setNotesActiveFilterStatus,
 } from '../../../features/notes/notesSlice'
-
-const MAX_WORKSPACES_IN_FILTER_LIST = 10
 
 export default function NotesFilterList({ onListItemSelect, flush = false }) {
   const dispatch = useDispatch()
@@ -36,7 +38,7 @@ export default function NotesFilterList({ onListItemSelect, flush = false }) {
         selectedWorkspace && location.pathname !== '/notes'
           ? null
           : workspaces
-              .filter(({ status }) => status === 10)
+              .filter(({ status }) => status === STATUS_ACTIVE)
               .sort((a, b) => b.updated_at - a.updated_at)
               .slice(0, MAX_WORKSPACES_IN_FILTER_LIST),
     }),
@@ -72,7 +74,7 @@ export default function NotesFilterList({ onListItemSelect, flush = false }) {
           activeFilter={notesActiveFilterListItem}
           eventKey="1"
           enableShowMoreLink={
-            filterList.workspaces.length === MAX_WORKSPACES_IN_FILTER_LIST
+            filterList.workspaces?.length === MAX_WORKSPACES_IN_FILTER_LIST
               ? true
               : false
           }

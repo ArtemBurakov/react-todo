@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { SEARCH_PARAM } from '../../app/constants'
 
 const initialState = {
   searchQuery: '',
-  searchParam: ['name'],
+  searchParam: SEARCH_PARAM,
 }
 
 export const searchSlice = createSlice({

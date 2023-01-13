@@ -7,8 +7,7 @@ import TaskItem from './TaskItem'
 import Pagination from '../../Pagination/Pagination'
 
 import { getTasks } from '../../../features/tasks/tasksSlice'
-
-const TASKS_PER_PAGE = 16
+import { STATUS_DELETED, TASKS_PER_PAGE } from '../../../app/constants'
 
 export default function TasksList({ note, type, maxTasks = null }) {
   const tasks = useSelector(getTasks)
@@ -20,7 +19,8 @@ export default function TasksList({ note, type, maxTasks = null }) {
 
     const data = tasks
       .filter(
-        (task) => task.note_id === (note?.id || null) && task.status !== 0
+        (task) =>
+          task.note_id === (note?.id || null) && task.status !== STATUS_DELETED
       )
       .sort((a, b) => b.updated_at - a.updated_at)
       .sort((a, b) => a.status - b.status)

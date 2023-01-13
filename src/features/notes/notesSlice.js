@@ -1,21 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Api, { handleResponseError } from '../../app/axiosClient'
-
-const DEFAULT_ACTIVE_FILTER_STATUS = 30
-const DEFAULT_ACTIVE_FILTER_LIST_ITEM = { name: 'All notes', status: 30 }
+import {
+  DEFAULT_ACTIVE_FILTER_STATUS,
+  DEFAULT_ACTIVE_FILTER_LIST_ITEM,
+  ACTIVE_ACTIVE_FILTER_LIST_ITEM,
+  DONE_ACTIVE_FILTER_LIST_ITEM,
+  DELETED_ACTIVE_FILTER_LIST_ITEM,
+  NOTE_TYPE_WITHOUT_TASKS,
+  STATUS_ACTIVE,
+  NOTE_SEARCH_PARAM,
+  SORT_BY_RECENT,
+} from '../../app/constants'
 
 const initialState = {
   notes: [],
   selectedNote: null,
-  noteSortBy: 'recent',
+  noteSortBy: SORT_BY_RECENT,
   noteSearchQuery: '',
-  noteSearchParam: ['name', 'text'],
+  noteSearchParam: NOTE_SEARCH_PARAM,
   filterList: {
     filters: [
       DEFAULT_ACTIVE_FILTER_LIST_ITEM,
-      { name: 'Active', status: 10 },
-      { name: 'Done', status: 20 },
-      { name: 'Deleted', status: 0 },
+      ACTIVE_ACTIVE_FILTER_LIST_ITEM,
+      DONE_ACTIVE_FILTER_LIST_ITEM,
+      DELETED_ACTIVE_FILTER_LIST_ITEM,
     ],
     activeFilter: DEFAULT_ACTIVE_FILTER_LIST_ITEM,
     activeFilterStatus: DEFAULT_ACTIVE_FILTER_STATUS,
@@ -44,7 +52,14 @@ export const fetchNotes = createAsyncThunk(
 export const addNote = createAsyncThunk(
   'notes/addNote',
   async (
-    { id, access_token, board_id = null, name, text, type = 0 },
+    {
+      id,
+      access_token,
+      board_id = null,
+      name,
+      text,
+      type = NOTE_TYPE_WITHOUT_TASKS,
+    },
     thunkAPI
   ) => {
     try {
@@ -56,7 +71,7 @@ export const addNote = createAsyncThunk(
           name: name,
           text: text,
           type: type,
-          status: 10,
+          status: STATUS_ACTIVE,
         },
         {
           headers: { Authorization: 'Bearer ' + access_token },

@@ -1,12 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Api, { handleResponseError } from '../../app/axiosClient'
+import {
+  WORKSPACE_SEARCH_PARAM,
+  STATUS_ACTIVE,
+  SORT_BY_RECENT,
+} from '../../app/constants'
 
 const initialState = {
   workspaces: [],
   selectedWorkspace: null,
-  workspaceSortBy: 'recent',
+  workspaceSortBy: SORT_BY_RECENT,
   workspaceSearchQuery: '',
-  workspaceSearchParam: ['name'],
+  workspaceSearchParam: WORKSPACE_SEARCH_PARAM,
   error: null,
   fetchWorkspacesLoading: 'idle',
   fetchWorkspaceLoading: 'idle',
@@ -53,7 +58,7 @@ export const addWorkspace = createAsyncThunk(
         {
           user_id: id,
           name: name,
-          status: 10,
+          status: STATUS_ACTIVE,
         },
         {
           headers: { Authorization: 'Bearer ' + access_token },

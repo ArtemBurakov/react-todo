@@ -2,7 +2,11 @@ import React from 'react'
 
 import { Row, Col, Card, Placeholder } from 'react-bootstrap'
 
-export default function LoadingNotesList({ numberOfNotes = 14 }) {
+import { DEFAULT_MAX_NOTES_IN_LOADING } from '../../../app/constants'
+
+export default function LoadingNotesList({
+  numberOfNotes = DEFAULT_MAX_NOTES_IN_LOADING,
+}) {
   return (
     <Row xs={1} md={1} lg={2} xl={3} className="g-3">
       {[...Array(numberOfNotes)].map((e, i) => (

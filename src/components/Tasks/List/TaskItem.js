@@ -11,14 +11,16 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {
+  STATUS_ACTIVE,
+  STATUS_DELETED,
+  STATUS_DONE,
+} from '../../../app/constants'
+
+import {
   updateTask,
   getUpdateTaskLoading,
 } from '../../../features/tasks/tasksSlice'
 import { getUser } from '../../../features/user/userSlice'
-
-const STATUS_ACTIVE = 10
-const STATUS_DONE = 20
-const STATUS_DELETED = 0
 
 export default function TaskItem({ task, type = 'default' }) {
   const dispatch = useDispatch()
@@ -33,13 +35,15 @@ export default function TaskItem({ task, type = 'default' }) {
   return (
     <ListGroup.Item
       className={
-        task.status === 20 ? 'text-decoration-line-through text-muted' : null
+        task.status === STATUS_DONE
+          ? 'text-decoration-line-through text-muted'
+          : null
       }
     >
       {type === 'default' ? (
         <Stack direction="horizontal" gap={3}>
           <div className="text-truncate">{task.name}</div>
-          {task.status === 20 && (
+          {task.status === STATUS_DONE && (
             <Button
               className="ms-auto"
               variant="outline-primary"
@@ -51,7 +55,7 @@ export default function TaskItem({ task, type = 'default' }) {
               <FontAwesomeIcon icon={faRotateBack} />
             </Button>
           )}
-          {task.status === 10 && (
+          {task.status === STATUS_ACTIVE && (
             <Button
               className="ms-auto"
               variant="outline-success"
@@ -63,7 +67,7 @@ export default function TaskItem({ task, type = 'default' }) {
               <FontAwesomeIcon icon={faCheck} />
             </Button>
           )}
-          {task.status === 0 ? (
+          {task.status === STATUS_DELETED ? (
             <Button
               className="ms-auto"
               variant="outline-secondary"

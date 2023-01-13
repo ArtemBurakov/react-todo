@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Form, InputGroup } from 'react-bootstrap'
 
 import Loader from '../Loader/Loader'
+import {
+  NOTE_TYPE_WITHOUT_TASKS,
+  NOTE_TYPE_WITH_TASKS,
+} from '../../app/constants'
 
 import { getUser } from '../../features/user/userSlice'
 import { getSelectedNote, updateNote } from '../../features/notes/notesSlice'
@@ -25,8 +29,8 @@ export default function AddNewTaskInput() {
         const noteId = selectedNote?.id
         await dispatch(addTask({ id, access_token, noteId, name }))
         setName('')
-        if (selectedNote?.type === 0) {
-          const type = 1
+        if (selectedNote?.type === NOTE_TYPE_WITHOUT_TASKS) {
+          const type = NOTE_TYPE_WITH_TASKS
           await dispatch(updateNote({ access_token, noteId, type }))
         }
       }

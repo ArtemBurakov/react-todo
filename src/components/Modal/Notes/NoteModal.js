@@ -4,6 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Form, Modal, Button, ButtonGroup, ToggleButton } from 'react-bootstrap'
 
 import '../Modal.css'
+
+import {
+  STATUS_ACTIVE,
+  STATUS_DELETED,
+  STATUS_DONE,
+} from '../../../app/constants'
 import Loader from '../../Loader/Loader'
 import TasksList from '../../Tasks/List/TasksList'
 import AddNewTaskInput from '../../Tasks/AddNewTaskInput'
@@ -27,9 +33,9 @@ export default function NoteModal({ show, handleClose }) {
   const [status, setStatus] = useState(selectedNote.status)
 
   const radios = [
-    { name: 'Active', value: 10, variant: 'outline-primary' },
-    { name: 'Done', value: 20, variant: 'outline-success' },
-    { name: 'Deleted', value: 0, variant: 'outline-danger' },
+    { name: 'Active', value: STATUS_ACTIVE, variant: 'outline-primary' },
+    { name: 'Done', value: STATUS_DONE, variant: 'outline-success' },
+    { name: 'Deleted', value: STATUS_DELETED, variant: 'outline-danger' },
   ]
 
   const handleInputName = (event) => setName(event.target.value)
