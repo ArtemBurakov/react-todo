@@ -10,6 +10,7 @@ const initialState = {
     errorMessage: null,
   },
   signup: {
+    status: null,
     errorMessage: null,
     formError: null,
   },
@@ -53,6 +54,9 @@ export const userSlice = createSlice({
     setUserFromLocalStorage: (state) => {
       state.user = JSON.parse(localStorage.getItem('user'))
     },
+    removeSignupStatus: (state) => {
+      state.signup.status = null
+    },
     removeUser: (state) => {
       state.user = null
       state.loading = 'idle'
@@ -81,11 +85,10 @@ export const userSlice = createSlice({
       })
       .addCase(signupUser.pending, (state) => {
         state.loading = 'pending'
-        state.signup.status = null
         state.signup.errorMessage = null
         state.signup.formError = null
       })
-      .addCase(signupUser.fulfilled, (state, action) => {
+      .addCase(signupUser.fulfilled, (state) => {
         if (state.loading === 'pending') {
           state.loading = 'idle'
           state.signup.status = 'success'
@@ -107,6 +110,7 @@ export const getUserLoading = (state) => state.user.loading
 export const getUserLoginEvent = (state) => state.user.login
 export const getUserSignupEvent = (state) => state.user.signup
 
-export const { setUserFromLocalStorage, removeUser } = userSlice.actions
+export const { setUserFromLocalStorage, removeSignupStatus, removeUser } =
+  userSlice.actions
 
 export default userSlice.reducer

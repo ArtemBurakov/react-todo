@@ -48,13 +48,12 @@ export default function NotesList({ maxNotes = null }) {
     const firstPageIndex = (currentPage - 1) * NOTES_PER_PAGE
     const lastPageIndex = firstPageIndex + NOTES_PER_PAGE
 
-    const data = preparedData.filter((item) =>
-      searchParam?.some(
-        (newItem) =>
-          item[newItem]
-            ?.toString()
-            ?.toLowerCase()
-            ?.indexOf(searchQuery.toLowerCase()) > -1
+    const data = preparedData.filter((object) =>
+      searchParam.some((objectKeyName) =>
+        object[objectKeyName]
+          ?.toString()
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())
       )
     )
 

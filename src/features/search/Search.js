@@ -27,13 +27,12 @@ export default function Search() {
 
   const search = (data) => {
     if (!searchQuery || !data.length) return []
-    return data?.filter((item) =>
-      searchParam?.some(
-        (newItem) =>
-          item[newItem]
-            ?.toString()
-            ?.toLowerCase()
-            ?.indexOf(searchQuery.toLowerCase()) > -1
+    return data.filter((object) =>
+      searchParam.some((objectKeyName) =>
+        object[objectKeyName]
+          ?.toString()
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())
       )
     )
   }

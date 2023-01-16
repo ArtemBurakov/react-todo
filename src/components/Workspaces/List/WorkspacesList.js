@@ -44,13 +44,12 @@ export default function WorkspacesList({
 
     const data = workspaces
       .filter((workspace) => workspace.status === STATUS_ACTIVE)
-      .filter((item) =>
-        searchParam?.some(
-          (newItem) =>
-            item[newItem]
-              ?.toString()
-              ?.toLowerCase()
-              ?.indexOf(searchQuery.toLowerCase()) > -1
+      .filter((object) =>
+        searchParam.some((objectKeyName) =>
+          object[objectKeyName]
+            ?.toString()
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
         )
       )
 
